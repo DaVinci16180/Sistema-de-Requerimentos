@@ -1,0 +1,73 @@
+Professor(joaoh):
+    nome: João Helis
+    matricula: 10101
+    disciplina: PPI
+    email: joaoh@gmail.com
+    
+Professor(danilo):
+    nome: Danilo Soares
+    matricula: 10102
+    disciplina: PDS
+    email: danilos@gmail.com
+
+Professor(lucilene):
+    nome: Lucilene Torquato
+    matricula: 10103
+    disciplina: Química
+    email: luci@gmail.com
+
+Professor(joaof):
+    nome: João Freire
+    matricula: 10104
+    disciplina: Matemática
+    email: joaofre@gmail.com
+    
+Professor(joaop):
+    nome: João Paulo
+    matricula: 10105
+    disciplina: Eletrônica
+    email: jpaulo@gmail.com
+    
+Aluno(francisco):
+    nome: Francisco de Assis
+    matricula: 20201
+    curso: Inf
+    periodo: 3
+    email: franassis@gmail.com
+    senha: 12345678
+    
+Aluno(joana):
+    nome: Joana Dantas
+    matricula: 20202
+    curso: Qm
+    periodo: 2
+    email: joanad@gmail.com
+    senha: 12345678
+    
+Aluno(maria):
+    nome: Maria Beatriz
+    matricula: 20203
+    curso: Rp
+    periodo: 2
+    email: mariabia@gmail.com
+    senha: 12345678
+    
+Aluno(paulo):
+    nome: Paulo Andrade
+    matricula: 20204
+    curso: Inf
+    periodo: 4
+    email: pauandra@gmail.com
+    senha: 12345678
+    
+Aluno(leticia):
+    nome: Leticia Costa
+    matricula: 20205
+    curso: Rp
+    periodo: 1
+    email: leticiac@gmail.com
+    senha: 12345678
+    
+Aluno(admin):
+    email: admin
+    senha: admin

@@ -2,74 +2,68 @@
 #{set title:'Home' /}
 <meta charset="utf-8">
 
-
-<div class="row">
-  <div class="col-lg-12">
-    <h3 class="page-header"><i class="fa fa-desktop"></i> Alunos</h3>
-    <ol class="breadcrumb">
-      <li><i class="fa fa-home"></i><a href="@{Application.index}">Início</a></li>
-      <li><i class="fa fa-desktop"></i>Alunos</li>
-    </ol>
-  </div>
-</div>
-
-<div class="row">
-	<div class="col-lg-4">
-		<form action="@{Alunos.buscar()}" method="post">
-			<input type="text" class="form-control" placeholder="Pesquisar" name="busca">
-		</form>
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+            <div class="page-title-icon">
+                <i class="fa fa-users icon-gradient bg-tempting-azure">
+                </i>
+            </div>
+            <div>Alunos Cadastrados
+                <div class="page-title-subheading">Lista de alunos cadastrados no banco de dados.
+                </div>
+            </div>
+         </div>
 	</div>
 </div>
 
 <div class="row">
-          <div class="col-lg-12">
-            <section class="panel">
-              <header class="panel-heading">
-                Total de n itens 
-              </header>
-              <div class="table-responsive">
-                <table class="table">
-                  <thead>
+    <div class="col-md-12">
+        <div class="main-card mb-3 card">
+            <div class="card-header">Alunos</div>
+            <div class="table-responsive">
+                <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                    <thead>
                     <tr>
-                      
-                      <th>#</th>
-                      <th>Nome</th>
-                      <th>Matricula</th>
-                      <th>Telefone</th>
-                      <th>E-mail</th>
-                      <th>Curso</th>
-                      <th>Periodo</th>
-                      <th>Opções</th>
-                      
+                        <th class="text-center">#</th>
+						<th>Nome</th>
+						<th>Matricula</th>
+						<th>E-mail</th>
+						<th>Curso</th>
+						<th>Periodo</th>
+						<th>Opções</th>
                     </tr>
-                  </thead>
-                  <tbody>
-                  #{list items:alunos, as:'aluno'}
-					<tr>
-						<td></td>
-						<td>${aluno.nome}</td>
-						<td>${aluno.matricula}</td>
-						<td>${aluno.telefone}</td>
-						<td>${aluno.email}</td>
-						<td>${aluno.curso}</td>
-						<td>${aluno.periodo}</td>
-						<td><a href="@{Alunos.deletar(aluno.id)}">Deletar</a></td>
-						<td><a href="@{Alunos.editar(aluno.id)}">Editar</a></td>
-					</tr>
-					#{/list}
-					#{else}
-						<td></td>
-						<td>Nenhum aluno encontrado</td>
-					#{/else}
-                  </tbody>
+                    </thead>
+                    <tbody>
+                    	#{list alunos}
+							<tr>
+								<td class="text-center">
+									<strong>${_index}</strong>
+								</td>
+								<td>${_.nome}</td>
+								<td>${_.matricula}</td>
+								<td>${_.email}</td>
+								<td>${_.curso}</td>
+								<td>${_	.periodo}</td>
+								<td>
+									<a href="@{Alunos.deletar(_.id)}">
+										<button class="mb-2 mr-2 border-0 btn-transition btn btn-outline-danger">Excluir</button>
+                                    </a>
+                                </td>
+								<td>
+									<a href="@{Alunos.editar(_.id)}">
+										<button class="mb-2 mr-2 border-0 btn-transition btn btn-outline-primary">Editar</button>
+									</a>
+								</td>
+							</tr>
+						#{/list}
+						#{else}
+								<td></td>
+								<td>Nenhum aluno encontrado</td>
+						#{/else}
+                    </tbody>
                 </table>
-                
-              </div>
-				<div class="form-group">
-                      <div class="col-lg-offset-0 col-lg-10">
-                        <a href="@{Alunos.form()}">Novo Aluno</a>
-                      </div>
-				</div>	
-            </section>
-          </div>
+            </div>
         </div>
+    </div>
+</div>

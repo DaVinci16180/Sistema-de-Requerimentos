@@ -1,15 +1,25 @@
 package models;
 
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
 import play.db.jpa.Model;
 @Entity
-public class Aluno extends Model {
-	public String nome;
-	public long matricula;
+public class Aluno extends Usuario {
 	public String curso;
-	public int periodo;
-	public String telefone;
-	public String email;
+	public String periodo;
+	
+	// Instance Initialization Block
+	{
+	this.nivel = 1;
+	}
+	
+	@OneToMany
+	@JoinColumn(name = "aluno_id")
+	public List<Requerimento> requerimentos;
+	
 
 }

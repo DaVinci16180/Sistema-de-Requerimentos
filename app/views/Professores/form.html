@@ -2,68 +2,63 @@
 #{set title:'Adicionar Professor' /}
 <meta charset="utf-8">
 
-
-<div class="row">
-  <div class="col-lg-12">
-    <h3 class="page-header"><i class="fa fa-desktop"></i> Novo Professor</h3>
-    <ol class="breadcrumb">
-      <li><i class="fa fa-home"></i><a href="@{Application.index}">Início</a></li>
-      <li><i class="fa fa-desktop"></i><a href="@{Professores.listar()}">Professores</a></li>
-      <li>Novo Professor</li>
-    </ol>
-  </div>
-</div>
-
-
-
-<div class="row">
-  <div class="col-lg-12">
-    <section class="panel">
-      <header class="panel-heading">
-      	Novo Professor
-      </header>
-      <div class="panel-body">
-        <div class="form-group">
-          <form class="form-horizontal" action="@{Professores.salvar()}" method="post">
-          	<input type="hidden" name="professor.id" value="${professor?.id}">
-            <div class="form-group">
-             <label class="col-sm-2 control-label">Nome</label>
-	             <div class="col-sm-10">
-	             	<input type="text" class="form-control" name="professor.nome" value="${professor?.nome}">
-	            </div>
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+            <div class="page-title-icon">
+                <i class="fa fa-user-plus icon-gradient bg-night-fade">
+                </i>
             </div>
-            <div class="form-group">
-             <label class="col-sm-2 control-label">Matrícula</label>
-             <div class="col-sm-10">
-             	<input type="text" class="form-control" name="professor.matricula" value="${professor?.matricula}">
-             </div>
+            <div>Novo Professor	
+                <div class="page-title-subheading">Cadastrar novo professor no banco de dados.
+                </div>
             </div>
-            <div class="form-group">
-             <label class="col-sm-2 control-label">Telefone</label>
-             <div class="col-sm-10">
-             	<input type="text" class="form-control" name="professor.telefone" value="${professor?.telefone}">
-             </div>
-            </div>
-            <div class="form-group">
-             <label class="col-sm-2 control-label">E-mail</label>
-             <div class="col-sm-10">
-             	<input type="text" class="form-control" name="professor.email" value="${professor?.email}">
-             </div>
-            </div>
-            <div class="form-group">
-             <label class="col-sm-2 control-label">Disciplina</label>
-             <div class="col-sm-10">
-             	<input type="text" class="form-control" name="professor.disciplina" value="${professor?.disciplina}">
-             </div>
-            </div>
-            <div class="form-group">
-              <div class="col-lg-offset-2 col-lg-10">
-                <button class="btn btn-primary" type="submit">Enviar</button>
-              </div>
-            </div>
-          </form>
         </div>
-      </div>
-    </section>
-  </div>
+	</div>
 </div>
+<div class="tab-content">
+	<div class="tab-pane tabs-animation fade show active" id="tab-content-0" role="tabpanel">
+	    <div class="main-card mb-3 card">
+	        <div class="card-body">
+	        	<h5 class="card-title">Dados do Professor</h5>
+	            <form class="" action="@{Professores.salvar()}" method="post">
+	            	<input type="hidden" name="professor.id" value="${professor?.id}">	
+	            	<div class="divider"></div>
+	            	<div class="position-relative form-group">
+	            		<label class="">Nome</label>
+	            		<input name="professor.nome" type="text" class="form-control" value="${professor?.nome}">
+            		</div>
+            		
+            		<div class="position-relative form-group">
+	            		<label class="">Matrícula</label>
+	            		<input name="professor.matricula" type="text" class="form-control" value="${professor?.matricula}">
+            		</div>
+            		
+            		<div class="position-relative form-group">
+	            		<label class="">Disciplina</label>
+	            		<input name="professor.disciplina" type="text" class="form-control" value="${professor?.disciplina}">
+            		</div>
+            		
+	            	<div class="form-row">
+					    <div class="col-md-6">
+					        <div class="position-relative form-group">
+					        	<label class="">Email</label>
+					        	<input name="professor.email" type="email" class="form-control" value="${professor?.email}">
+				        	</div>
+					    </div>
+					    <div class="col-md-6">
+					        <div class="position-relative form-group">
+					        	<label class="">Senha</label>
+					        	<input name="senha" type="password" class="form-control">
+				        	</div>
+					    </div>
+					</div>
+	            	
+	            	<button class="mt-2 btn btn-primary" type="submit">Enviar</button>
+	            	
+	            	
+	            	
+	            </form>
+	        </div>
+	    </div>
+	</div>

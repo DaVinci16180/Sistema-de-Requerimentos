@@ -5,14 +5,19 @@ import java.util.List;
 import models.Aluno;
 import models.Professor;
 import play.mvc.Controller;
+import play.mvc.With;
 
+@With(Seguranca.class)
 public class Professores extends Controller{
 	
 	public static void form() {
 		render();
 	}
 	
-	public static void salvar(Professor professor) {
+	public static void salvar(Professor professor, String senha) {
+		if (senha.equals("") == false) {
+			professor.senha = senha;
+		}
 		professor.save();
 		listar();
 	}
