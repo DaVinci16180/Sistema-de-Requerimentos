@@ -13,11 +13,10 @@ public class Professor extends Usuario{
 	
 	// Instance Initialization Block
 	{
-	this.nivel = 2;
+		this.nivel = 2;
 	}
 	
-	@OneToMany
-	@JoinColumn(name = "professor_id")
+	@OneToMany(mappedBy="professor")
 	public List<Requerimento> requerimentos;
 
 }

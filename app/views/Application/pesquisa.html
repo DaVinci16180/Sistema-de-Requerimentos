@@ -1,0 +1,141 @@
+#{extends 'main.html' /}
+#{set title:'Resultados da pesquisa' /}
+#{set titleicon: 'fa fa-search icon-gradient bg-ripe-malin' /}
+#{set pagetitle: 'Resultados' /}
+#{set subheading: 'Resultados da pesquisa' /}
+<meta charset="utf-8">
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="main-card mb-3 card">
+            <div class="card-header">Requerimentos</div>
+            <div class="table-responsive">
+                <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th class="text-center">#</th>
+						<th>Tipo</th>
+						<th>Aluno</th>
+						<th>Professor</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    	#{list requerimentos}
+							<tr>
+								<td class="text-center">
+									<strong>${_index}</strong>
+								</td>
+								<td>${_.tipo}</td>
+								<td>${_.aluno?.nome}</td>
+								<td>${_.professor?.nome}</td>
+							</tr>
+						#{/list}
+						#{else}
+								<td></td>
+								<td>Nenhum requerimento encontrado</td><td></td><td></td>
+						#{/else}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+#{if session.get("usuario.nivel").equals("3")}
+<div class="row">
+    <div class="col-md-12">
+        <div class="main-card mb-3 card">
+            <div class="card-header">Alunos</div>
+            <div class="table-responsive">
+                <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th class="text-center">#</th>
+						<th>Nome</th>
+						<th>Matricula</th>
+						<th>E-mail</th>
+						<th>Curso</th>
+						<th>Periodo</th>
+						<th>Opções</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    	#{list alunos}
+							<tr>
+								<td class="text-center">
+									<strong>${_index}</strong>
+								</td>
+								<td>${_.nome}</td>
+								<td>${_.matricula}</td>
+								<td>${_.email}</td>
+								<td>${_.curso}</td>
+								<td>${_.periodo}</td>
+								<td>
+									<a href="@{Alunos.deletar(_.id)}">
+										<button class="mb-2 mr-2 border-0 btn-transition btn btn-outline-danger">Excluir</button>
+                                    </a>
+                                </td>
+								<td>
+									<a href="@{Alunos.editar(_.id)}">
+										<button class="mb-2 mr-2 border-0 btn-transition btn btn-outline-primary">Editar</button>
+									</a>
+								</td>
+							</tr>
+						#{/list}
+						#{else}
+								<td></td><td>Nenhum aluno encontrado</td><td></td><td></td><td></td><td></td><td></td>
+						#{/else}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="main-card mb-3 card">
+            <div class="card-header">Professores</div>
+            <div class="table-responsive">
+                <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th class="text-center">#</th>
+						<th>Nome</th>
+						<th>Matricula</th>
+						<th>E-mail</th>
+						<th>Disciplina</th>
+						<th>Opções</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    	#{list professores}
+								<tr>
+								<td class="text-center">
+									<strong>${_index}</strong>
+								</td>
+								<td>${_.nome}</td>
+								<td>${_.matricula}</td>
+								<td>${_.email}</td>
+								<td>${_.disciplina}</td>
+								<td>
+									<a href="@{Professores.deletar(_.id)}">
+										<button class="mb-2 mr-2 border-0 btn-transition btn btn-outline-danger">Excluir</button>
+                                    </a>
+                                </td>
+								<td>
+									<a href="@{Professores.editar(_.id)}">
+										<button class="mb-2 mr-2 border-0 btn-transition btn btn-outline-primary">Editar</button>
+									</a>
+								</td>
+							</tr>
+						#{/list}
+						#{else}
+							<td></td><td>Nenhum professor encontrado</td><td></td><td></td><td></td><td></td><td></td>
+						#{/else}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+#{/if}

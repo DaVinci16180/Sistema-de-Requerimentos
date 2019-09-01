@@ -18,7 +18,10 @@ public class Professores extends Controller{
 		if (senha.equals("") == false) {
 			professor.senha = senha;
 		}
+		professor.sidebar = "app-sidebar sidebar-shadow";
+		professor.header = "app-header header-shadow";
 		professor.save();
+		flash.success("Dados do professor cadastrados com sucesso!");
 		listar();
 	}
 	
@@ -30,6 +33,7 @@ public class Professores extends Controller{
 	public static void deletar(Long id) {
 		Professor professor = Professor.findById(id);
 		professor.delete();
+		flash.success("Professor removido com sucesso!");
 		listar();
 	}
 	

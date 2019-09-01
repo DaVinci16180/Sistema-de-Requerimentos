@@ -1,21 +1,12 @@
 #{extends 'main.html' /}
-#{set title:'Home' /}
+#{set title:'Professores Cadastrados' /}
+#{set titleicon: 'fa fa-users icon-gradient bg-night-fade' /}
+#{set pagetitle: 'Professores Cadastrados' /}
+#{set subheading: 'Lista de professores cadastrados no banco de dados.' /}
+#{set professorestabactive: 'mm-active' /}
+#{set professoresexpanded: 'true' /}
+#{set plistaractive: 'mm-active' /}
 <meta charset="utf-8">
-
-<div class="app-page-title">
-    <div class="page-title-wrapper">
-        <div class="page-title-heading">
-            <div class="page-title-icon">
-                <i class="fa fa-users icon-gradient bg-night-fade">
-                </i>
-            </div>
-            <div>Professores Cadastrados
-                <div class="page-title-subheading">Lista de professores cadastrados no banco de dados.
-                </div>
-            </div>
-         </div>
-	</div>
-</div>
 
 <div class="row">
     <div class="col-md-12">
@@ -34,30 +25,29 @@
                     </tr>
                     </thead>
                     <tbody>
-                    	#{list items:professores, as:'professor'}
+                    	#{list professores}
 								<tr>
 								<td class="text-center">
-									<strong>${professor_index}</strong>
+									<strong>${_index}</strong>
 								</td>
-								<td>${professor.nome}</td>
-								<td>${professor.matricula}</td>
-								<td>${professor.email}</td>
-								<td>${professor.disciplina}</td>
+								<td>${_.nome}</td>
+								<td>${_.matricula}</td>
+								<td>${_.email}</td>
+								<td>${_.disciplina}</td>
 								<td>
-									<a href="@{Professores.deletar(professor.id)}">
+									<a href="@{Professores.deletar(_.id)}">
 										<button class="mb-2 mr-2 border-0 btn-transition btn btn-outline-danger">Excluir</button>
                                     </a>
                                 </td>
 								<td>
-									<a href="@{Professores.editar(professor.id)}">
+									<a href="@{Professores.editar(_.id)}">
 										<button class="mb-2 mr-2 border-0 btn-transition btn btn-outline-primary">Editar</button>
 									</a>
 								</td>
 							</tr>
 						#{/list}
 						#{else}
-								<td></td>
-								<td>Nenhum professor encontrado</td>
+							<td></td><td>Nenhum professor encontrado</td><td></td><td></td><td></td><td></td><td></td>
 						#{/else}
                     </tbody>
                 </table>

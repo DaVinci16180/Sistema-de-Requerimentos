@@ -1,21 +1,22 @@
 #{extends 'main.html' /}
-#{set title:'Home' /}
+#{set title:'Requerimentos Enviados' /}
+#{set titleicon: 'fa fa-archive icon-gradient bg-sunny-morning' /}
+#{set requerimentostabactive: 'mm-active' /}
+#{set requerimentosexpanded: 'true' /}
+#{set rlistaractive: 'mm-active' /}
+#{if session.get("usuario.nivel").equals("1")}
+	#{set pagetitle: 'Registro de Atividades' /}
+	#{set subheading: 'Registro dos requerimentos que você enviou.' /}
+#{/if}
+#{if session.get("usuario.nivel").equals("2")}
+	#{set pagetitle: 'Registro de Entrada' /}
+	#{set subheading: 'Registro dos requerimentos que você recebeu.' /}
+#{/if}
+#{if session.get("usuario.nivel").equals("3")}
+	#{set pagetitle: 'Registro de Atividades' /}
+	#{set subheading: 'Registro dos requerimentos cadastrados no banco de dados.' /}
+#{/if}
 <meta charset="utf-8">
-
-<div class="app-page-title">
-    <div class="page-title-wrapper">
-        <div class="page-title-heading">
-            <div class="page-title-icon">
-                <i class="pe-7s-file icon-gradient bg-premium-dark">
-                </i>
-            </div>
-            <div>Requerimentos Cadastrados
-                <div class="page-title-subheading">Lista de requerimentos cadastrados no banco de dados.
-                </div>
-            </div>
-         </div>
-	</div>
-</div>
 
 <div class="row">
     <div class="col-md-12">
@@ -39,7 +40,7 @@
 									<strong>${req_index}</strong>
 								</td>
 								<td>${req.tipo}</td>
-								<td>${req.aluno.nome}</td>
+								<td>${req.aluno?.nome}</td>
 								<td>${req.professor?.nome}</td>
 								<td>
 									<a href="@{Requerimentos.deletar(req.id)}">

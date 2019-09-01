@@ -14,11 +14,10 @@ public class Aluno extends Usuario {
 	
 	// Instance Initialization Block
 	{
-	this.nivel = 1;
+		this.nivel = 1;
 	}
 	
-	@OneToMany
-	@JoinColumn(name = "aluno_id")
+	@OneToMany(mappedBy="aluno")
 	public List<Requerimento> requerimentos;
 	
 

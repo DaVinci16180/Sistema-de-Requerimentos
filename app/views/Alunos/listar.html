@@ -1,21 +1,12 @@
 #{extends 'main.html' /}
-#{set title:'Home' /}
+#{set title:'Alunos Cadastrados' /}
+#{set titleicon: 'fa fa-users icon-gradient bg-tempting-azure' /}
+#{set pagetitle: 'Alunos Cadastrados' /}
+#{set subheading: 'Lista de alunos cadastrados no banco de dados.' /}
+#{set alunostabactive: 'mm-active' /}
+#{set alunosexpanded: 'true' /}
+#{set alistaractive: 'mm-active' /}
 <meta charset="utf-8">
-
-<div class="app-page-title">
-    <div class="page-title-wrapper">
-        <div class="page-title-heading">
-            <div class="page-title-icon">
-                <i class="fa fa-users icon-gradient bg-tempting-azure">
-                </i>
-            </div>
-            <div>Alunos Cadastrados
-                <div class="page-title-subheading">Lista de alunos cadastrados no banco de dados.
-                </div>
-            </div>
-         </div>
-	</div>
-</div>
 
 <div class="row">
     <div class="col-md-12">
@@ -44,7 +35,7 @@
 								<td>${_.matricula}</td>
 								<td>${_.email}</td>
 								<td>${_.curso}</td>
-								<td>${_	.periodo}</td>
+								<td>${_.periodo}</td>
 								<td>
 									<a href="@{Alunos.deletar(_.id)}">
 										<button class="mb-2 mr-2 border-0 btn-transition btn btn-outline-danger">Excluir</button>
@@ -58,8 +49,7 @@
 							</tr>
 						#{/list}
 						#{else}
-								<td></td>
-								<td>Nenhum aluno encontrado</td>
+							<td></td><td>Nenhum aluno encontrado</td><td></td><td></td><td></td><td></td><td></td>
 						#{/else}
                     </tbody>
                 </table>

@@ -5,6 +5,7 @@
 	<meta charset="utf-8">
 	<title>Login</title>
 	<link href="@{'public/LoginPage/css/style.css'}" rel="stylesheet">
+	<link href="@{'public/stylesheets/main.css'}" rel="stylesheet">
 	<script src="@{'public/LoginPage/js/script.js'}"></script>
 	<script src="@{'public/LoginPage/js/script.js'}"></script>
 	<!------ Include the above in your HEAD tag ---------->
@@ -14,17 +15,21 @@
 			<div class="register-info-box">
 				<h2>Bem Vindo(a) ao <strong>SEAC</strong>AR</h2>
 				<p>Esta é uma plataforma de gestão de requerimentos totalmente online.</p>
+				<a href=""><button class="register-button">Registre-se</button></a>
+				
 			</div>
 								
 			<div class="white-panel">
 				<form action="@{Login.autentica()}" method="post">
 					<div class="login-show">
 						<h2>LOGIN</h2>
-						<input type="text" placeholder="Email" name="email">
+						<input type="email" placeholder="Email" name="email" value="${email}">
 						<input type="password" placeholder="Password" name="senha">
-	<!-- 					<input type="button" value="Login"> -->
 						<button type="submit">Login</button>
 						<a href="">Forgot password?</a>
+						#{if flash.error}
+							<div class="login-fail">${flash.error}</div>
+						#{/if}
 					</div>
 				</form>
 			</div>

@@ -67,20 +67,19 @@ a{
     right:0;
     position:absolute;
     text-align:left;
-    
 }
 
 .login-show, 
 .register-show{
     z-index: 1;
-/*     display:none; */
-/*     opacity:0; */
+    display:block;
+    opacity:1;
     transition:0.3s ease-in-out;
     color:#242424;
     text-align:left;
     padding:50px;
 }
-
+.login-show input[type="email"],
 .login-show input[type="text"], .login-show input[type="password"]{
     width: 100%;
     display: block;
@@ -89,6 +88,7 @@ a{
     border: 1px solid #b5b5b5;
     outline: none;
 }
+
 .login-show input[type="button"] {
     max-width: 150px;
     width: 100%;
@@ -135,8 +135,18 @@ a{
 }
 a{
   text-decoration:none;
-  color:#2c7715;
+  color:purple;
 }
-    
-    
-    
+
+.register-button{
+	max-width: 250px;
+    width: 100%;
+    background: 0,0,0,0;
+    border: solid;
+    border-color: #c0c0c0;
+    color: #c0c0c0;
+    padding: 10px;
+    text-transform: uppercase;
+    border-radius: 2px;
+    cursor:pointer;
+}

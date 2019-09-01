@@ -3,30 +3,45 @@ Professor(joaoh):
     matricula: 10101
     disciplina: PPI
     email: joaoh@gmail.com
+    senha: 12345678
+    header: app-header header-shadow
+    sidebar: app-sidebar sidebar-shadow
     
 Professor(danilo):
     nome: Danilo Soares
     matricula: 10102
     disciplina: PDS
     email: danilos@gmail.com
+    senha: 12345678
+    header: app-header header-shadow
+    sidebar: app-sidebar sidebar-shadow
 
 Professor(lucilene):
     nome: Lucilene Torquato
     matricula: 10103
     disciplina: Química
     email: luci@gmail.com
+    senha: 12345678
+    header: app-header header-shadow
+    sidebar: app-sidebar sidebar-shadow
 
 Professor(joaof):
     nome: João Freire
     matricula: 10104
     disciplina: Matemática
     email: joaofre@gmail.com
+    senha: 12345678
+    header: app-header header-shadow
+    sidebar: app-sidebar sidebar-shadow
     
 Professor(joaop):
     nome: João Paulo
     matricula: 10105
     disciplina: Eletrônica
     email: jpaulo@gmail.com
+    senha: 12345678
+    header: app-header header-shadow
+    sidebar: app-sidebar sidebar-shadow
     
 Aluno(francisco):
     nome: Francisco de Assis
@@ -35,6 +50,8 @@ Aluno(francisco):
     periodo: 3
     email: franassis@gmail.com
     senha: 12345678
+    header: app-header header-shadow
+    sidebar: app-sidebar sidebar-shadow
     
 Aluno(joana):
     nome: Joana Dantas
@@ -43,7 +60,9 @@ Aluno(joana):
     periodo: 2
     email: joanad@gmail.com
     senha: 12345678
-    
+    header: app-header header-shadow
+    sidebar: app-sidebar sidebar-shadow
+
 Aluno(maria):
     nome: Maria Beatriz
     matricula: 20203
@@ -51,7 +70,9 @@ Aluno(maria):
     periodo: 2
     email: mariabia@gmail.com
     senha: 12345678
-    
+    header: app-header header-shadow
+    sidebar: app-sidebar sidebar-shadow
+
 Aluno(paulo):
     nome: Paulo Andrade
     matricula: 20204
@@ -59,6 +80,8 @@ Aluno(paulo):
     periodo: 4
     email: pauandra@gmail.com
     senha: 12345678
+    header: app-header header-shadow
+    sidebar: app-sidebar sidebar-shadow
     
 Aluno(leticia):
     nome: Leticia Costa
@@ -67,7 +90,12 @@ Aluno(leticia):
     periodo: 1
     email: leticiac@gmail.com
     senha: 12345678
+    header: app-header header-shadow
+    sidebar: app-sidebar sidebar-shadow
     
-Aluno(admin):
-    email: admin
+Seac(admin):
+    nome: Administrador
+    email: admin@admin.com
     senha: admin
+    header: app-header header-shadow
+    sidebar: app-sidebar sidebar-shadow

@@ -1,0 +1,44 @@
+.login-fail{
+	color: red;
+	animation: deny 1.0s ease forwards;
+}
+
+.flash {
+   z-index:1;
+   width:100%;
+   padding:5px;
+   padding-top:30px;
+   position: absolute;
+   font-size: 15px;
+   left:0px;
+   top:-35px;
+   color:white;
+   background-color:green;
+   opacity:0.2;
+   box-shadow: 0px 5px 15px black;
+   animation: drop 1.0s ease forwards,
+				back 1.0s 3.0s ease forwards;
+   
+  
+}
+
+@keyframes deny{
+	0%{}
+	20%{transform: translateX(10px)}
+	40%{transform: translateX(-8px)}
+	60%{transform: translateX(6px)}
+	80%{transform: translateX(0px)}
+	100%{transform: translateX(0px)}
+}
+
+@keyframes back{
+	0%{transform: translateY(11px)}
+	70%{ transform: translateY(20px) }
+	100%{ transform: translateY(-40px) }
+}
+
+@keyframes drop{
+	0%{}
+	70%{ transform: translateY(25px) }
+	100%{ transform: translateY(11px); opacity: 0.6; }
+}
