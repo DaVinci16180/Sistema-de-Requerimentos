@@ -12,10 +12,6 @@ public class Aluno extends Usuario {
 	public String curso;
 	public String periodo;
 	
-	// Instance Initialization Block
-	{
-		this.nivel = 1;
-	}
 	
 	@OneToMany(mappedBy="aluno")
 	public List<Requerimento> requerimentos;

@@ -80,7 +80,7 @@
                                     <div class="btn-group">
                                         <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="p-0 btn">
                                         	${session.get("usuario.nome")} &nbsp
-                                        	<img width="42" class="rounded-circle" src="@{'public/architectui-html-free/architectui-html-free/assets/images/avatars/1.jpg'}" alt="">
+                                        	<img width="35" class="rounded-circle" src='${session.get("usuario.foto")}' alt="">
                                         	<i class="fa fa-angle-down ml-2 opacity-8"></i>
                                         </a>
                                         <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
@@ -92,14 +92,11 @@
                                     </div>
                                 </div>
                                 
-                                <div class="widget-content-right header-user-info ml-3">
-                                    <button type="button" class="btn-shadow p-1 btn btn-primary btn-sm show-toastr-example">
-                                        <i class="fa text-white fa-calendar pr-1 pl-1"></i>
-                                    </button>
-                                </div>
+                                
                             </div>
                         </div>
-                    </div>        </div>
+                    </div>        
+                </div>
             </div>
         </div>        
         <div class="ui-theme-settings">
@@ -252,7 +249,7 @@
                                     Página Inicial
                                 </a>
                             </li>
-                            #{if session.get("usuario.nivel").equals("3")}
+                            #{if session.get("usuario.tipo").equals("adm")}
                             <li class="app-sidebar__heading">Usuários</li>
                             <li class="#{get 'alunostabactive' /}">
                                 <a href="#" aria-expanded="#{get 'alunosexpanded' /}">
@@ -261,12 +258,12 @@
                                     <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                                 </a>
                                 <ul>
-                                	<li>
-                                        <a href="@{Alunos.form()}" class="#{get 'aformactive' /}">
-                                            <i class="metismenu-icon"></i>
-                                            Cadastrar Aluno
-                                        </a>
-                                    </li>
+<!--                                 	<li> -->
+<!--                                         <a href="" class="#{get 'aformactive' /}"> -->
+<!--                                             <i class="metismenu-icon"></i> -->
+<!--                                             Cadastrar Aluno -->
+<!--                                         </a> -->
+<!--                                     </li> -->
                                     <li>
                                         <a href="@{Alunos.listar()}" class="#{get 'alistaractive' /}">
                                             <i class="metismenu-icon"></i>
@@ -283,12 +280,12 @@
                                     <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                                 </a>
                                 <ul>
-                                	<li>
-                                        <a href="@{Professores.form()}" class="#{get 'pformactive' /}">
-                                            <i class="metismenu-icon"></i>
-                                            Cadastrar Professor 
-                                        </a>
-                                    </li>
+<!--                                 	<li> -->
+<!--                                         <a href="" class="#{get 'pformactive' /}"> -->
+<!--                                             <i class="metismenu-icon"></i> -->
+<!--                                             Cadastrar Professor  -->
+<!--                                         </a> -->
+<!--                                     </li> -->
                                     <li>	<!-- Submenus -->
                                         <a href="@{Professores.listar()}" class="#{get 'plistaractive' /}">
                                             <i class="metismenu-icon"></i>
@@ -306,7 +303,7 @@
                                     <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                                 </a>
                                 <ul>
-                                	#{if session.get("usuario.nivel").equals("1")}
+                                	#{if session.get("usuario.tipo").equals("Aluno")}
                                 	<li>
                                         <a href="@{Requerimentos.form()}" class="#{get 'rformactive' /}">
                                             <i class="metismenu-icon"></i>

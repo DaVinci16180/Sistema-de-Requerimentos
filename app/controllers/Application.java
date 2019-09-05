@@ -20,13 +20,12 @@ public class Application extends Controller {
     	List<Requerimento> requerimentos = null;
     	List<Aluno> alunos = null;
     	List<Professor> professores = null;
-		if (session.get("usuario.nivel").equals("1")) {
+		if (session.get("usuario.tipo").equals("Aluno")) {
 			requerimentos = Requerimento.find("professor.nome like ?1 and aluno.email like ?2", "%"+pesquisa+"%", session.get("usuario.email")).fetch();
-		} else if (session.get("usuario.nivel").equals("2")) {
+		} else if (session.get("usuario.tipo").equals("Professor")) {
 			requerimentos = Requerimento.find("aluno.nome like ?1 and professor.email like ?2", "%"+pesquisa+"%", session.get("usuario.email")).fetch();
 		} else {
-			requerimentos = Requerimento.find("aluno.nome like ?1", "%"+pesquisa+"%").fetch();
-			requerimentos.addAll(Requerimento.find("professor.nome like ?1", "%"+pesquisa+"%").fetch());
+			requerimentos = Requerimento.find("aluno.nome like ?1 or professor.nome like ?1", "%"+pesquisa+"%").fetch();
 			alunos = Aluno.find("nome like ?1 or email like ?1 or matricula like ?1", "%"+pesquisa+"%").fetch();
 			professores = Professor.find("nome like ?1 or email like ?1 or matricula like ?1", "%"+pesquisa+"%").fetch();
 		}
@@ -34,21 +33,23 @@ public class Application extends Controller {
 	}
     
     public static void personalizar(String mudaheader, String mudasidebar) {
-		List<Usuario> usuario = Usuario.find("byEmail", session.get("usuario.email")).fetch(1);
-		Usuario user;
-		if (session.get("usuario.nivel").equals("1")) {
-			user = (Aluno) usuario.get(0);
-		} else if (session.get("usuario.nivel").equals("2")) {
-			user = (Professor) usuario.get(0);
+		
+		if (session.get("usuario.tipo").equals("adm") == false) {
+			Usuario user = Usuario.find("byEmail", session.get("usuario.email")).first();
+			user.header = mudaheader;
+			user.sidebar = mudasidebar;
+			session.put("header", user.header);
+			session.put("sidebar", user.sidebar);
+			user.save();
 		} else {
-			user = (Seac) usuario.get(0);
+			Administrador adm = Administrador.find("matricula = ?", session.get("usuario.matricula")).first();
+			adm.header = mudaheader;
+			adm.sidebar = mudasidebar;
+			session.put("header", adm.header);
+			session.put("sidebar", adm.sidebar);
+			adm.save();
 		}
 		
-		user.header = mudaheader;
-		user.sidebar = mudasidebar;
-		session.put("header", user.header);
-		session.put("sidebar", user.sidebar);
-		user.save();
 		Application.index();
 	}
     

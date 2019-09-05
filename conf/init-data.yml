@@ -93,9 +93,8 @@ Aluno(leticia):
     header: app-header header-shadow
     sidebar: app-sidebar sidebar-shadow
     
-Seac(admin):
-    nome: Administrador
-    email: admin@admin.com
+Administrador(admin):
+    matricula: admin
     senha: admin
     header: app-header header-shadow
     sidebar: app-sidebar sidebar-shadow

@@ -12,13 +12,10 @@ public class Usuario extends Model {
 	public String email;
 	public String senha;
 	public String matricula;
-	public int nivel;
+	public String tipoVinculo;
+	public String url_foto_75x100;
 	
 	public String header;
 	public String sidebar;
-	
-	public void setSenha(String s) {
-		senha = Crypto.passwordHash(s);
-	}
-	
+
 }

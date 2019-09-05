@@ -11,10 +11,6 @@ import play.db.jpa.Model;
 public class Professor extends Usuario{
 	public String disciplina;
 	
-	// Instance Initialization Block
-	{
-		this.nivel = 2;
-	}
 	
 	@OneToMany(mappedBy="professor")
 	public List<Requerimento> requerimentos;

@@ -14,8 +14,7 @@ public class Requerimentos extends Controller{
 	
 	public static void form() {
 		List<Professor> professores = Professor.findAll();
-		List<Aluno> alunos = Aluno.find("byEmail", session.get("usuario.email")).fetch(1);
-		Aluno aluno = alunos.get(0);
+		Aluno aluno = Aluno.find("matricula = ?", session.get("usuario.matricula")).first();
 		render(professores, aluno);
 	}
 	
@@ -35,12 +34,12 @@ public class Requerimentos extends Controller{
 	
 	public static void listar() {
 		List<Requerimento> requerimentos;
-		List<Usuario> usuario = Usuario.find("byEmail", session.get("usuario.email")).fetch(1);
-		if (session.get("usuario.nivel").equals("1")) {
-			Aluno aluno = (Aluno) usuario.get(0);
+		Usuario usuario = Usuario.find("matricula = ?", session.get("usuario.matricula")).first();
+		if (session.get("usuario.tipo").equals("Aluno")) {
+			Aluno aluno = (Aluno) usuario;
 			requerimentos = aluno.requerimentos;
-		} else if (session.get("usuario.nivel").equals("2")) {
-			Professor professor = (Professor) usuario.get(0);
+		} else if (session.get("usuario.tipo").equals("Professor")) {
+			Professor professor = (Professor) usuario;
 			requerimentos = professor.requerimentos;
 		} else {
 			requerimentos = Requerimento.findAll();
@@ -51,6 +50,7 @@ public class Requerimentos extends Controller{
 	public static void deletar(Long id) {
 		Requerimento requerimento = Requerimento.findById(id);
 		requerimento.delete();
+		flash.success("Requerimento removido com sucesso!");
 		listar();
 	}
 	

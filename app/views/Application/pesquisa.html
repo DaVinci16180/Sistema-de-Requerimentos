@@ -40,7 +40,7 @@
         </div>
     </div>
 </div>
-#{if session.get("usuario.nivel").equals("3")}
+#{if session.get("usuario.tipo").equals("adm")}
 <div class="row">
     <div class="col-md-12">
         <div class="main-card mb-3 card">
@@ -74,11 +74,11 @@
 										<button class="mb-2 mr-2 border-0 btn-transition btn btn-outline-danger">Excluir</button>
                                     </a>
                                 </td>
-								<td>
-									<a href="@{Alunos.editar(_.id)}">
-										<button class="mb-2 mr-2 border-0 btn-transition btn btn-outline-primary">Editar</button>
-									</a>
-								</td>
+<!-- 								<td> -->
+<!-- 									<a href=""> -->
+<!-- 										<button class="mb-2 mr-2 border-0 btn-transition btn btn-outline-primary">Editar</button> -->
+<!-- 									</a> -->
+<!-- 								</td> -->
 							</tr>
 						#{/list}
 						#{else}
@@ -122,11 +122,11 @@
 										<button class="mb-2 mr-2 border-0 btn-transition btn btn-outline-danger">Excluir</button>
                                     </a>
                                 </td>
-								<td>
-									<a href="@{Professores.editar(_.id)}">
-										<button class="mb-2 mr-2 border-0 btn-transition btn btn-outline-primary">Editar</button>
-									</a>
-								</td>
+<!-- 								<td> -->
+<!-- 									<a href=""> -->
+<!-- 										<button class="mb-2 mr-2 border-0 btn-transition btn btn-outline-primary">Editar</button> -->
+<!-- 									</a> -->
+<!-- 								</td> -->
 							</tr>
 						#{/list}
 						#{else}

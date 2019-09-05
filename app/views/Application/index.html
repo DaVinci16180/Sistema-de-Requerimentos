@@ -11,16 +11,16 @@
     <div class="main-card mb-3 card">
         <div class="card-body"><h5 class="card-title">List group contextual classes</h5>
             <ul class="list-group">
-            #{if session.get("usuario.nivel").equals("1")}
+            #{if session.get("usuario.tipo").equals("Aluno")}
                 <li class="list-group-item-success list-group-item">PÁGINA INICIAL DO ALUNO</li>
             #{/if}
-            #{if session.get("usuario.nivel").equals("2")}
+            #{if session.get("usuario.tipo").equals("Professor")}
                 <li class="list-group-item-info list-group-item">PÁGINA INICIAL DO PROFESSOR</li>
             #{/if}
-            #{if session.get("usuario.nivel").equals("3")}
+            #{if session.get("usuario.tipo").equals("adm")}
                 <li class="list-group-item-warning list-group-item">PÁGINA INICIAL DA SEAC</li>
             #{/if}
-            <li class="list-group-item-danger list-group-item">${session.get("usuario.nivel")}</li>
+            <li class="list-group-item-danger list-group-item">${session.get("usuario.tipo")}</li>
             </ul>
         </div>
     </div>

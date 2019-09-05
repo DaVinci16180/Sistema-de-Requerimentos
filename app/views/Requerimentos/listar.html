@@ -4,15 +4,15 @@
 #{set requerimentostabactive: 'mm-active' /}
 #{set requerimentosexpanded: 'true' /}
 #{set rlistaractive: 'mm-active' /}
-#{if session.get("usuario.nivel").equals("1")}
+#{if session.get("usuario.tipo").equals("Aluno")}
 	#{set pagetitle: 'Registro de Atividades' /}
 	#{set subheading: 'Registro dos requerimentos que você enviou.' /}
 #{/if}
-#{if session.get("usuario.nivel").equals("2")}
+#{if session.get("usuario.tipo").equals("Professor")}
 	#{set pagetitle: 'Registro de Entrada' /}
 	#{set subheading: 'Registro dos requerimentos que você recebeu.' /}
 #{/if}
-#{if session.get("usuario.nivel").equals("3")}
+#{if session.get("usuario.tipo").equals("adm")}
 	#{set pagetitle: 'Registro de Atividades' /}
 	#{set subheading: 'Registro dos requerimentos cadastrados no banco de dados.' /}
 #{/if}
@@ -50,8 +50,7 @@
 							</tr>
 						#{/list}
 						#{else}
-								<td></td>
-								<td>Nenhum requerimento encontrado</td>
+								<td></td><td>Nenhum requerimento encontrado</td><td></td><td></td><td></td>
 						#{/else}
                     </tbody>
                 </table>
