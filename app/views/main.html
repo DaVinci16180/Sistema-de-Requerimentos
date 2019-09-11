@@ -311,12 +311,39 @@
                                         </a>
                                     </li>
                                     #{/if}
-                                    <li>	<!-- Submenus -->
+                                    <li>
                                         <a href="@{Requerimentos.listar()}" class="#{get 'rlistaractive' /}">
                                             <i class="metismenu-icon"></i>
                                             Registro de Atividades
                                         </a>
                                     </li>
+                                    
+                                </ul>
+                            </li>
+                            
+                            
+                            <li class="#{get 'reqespectabactive' /}">
+                                <a href="#" aria-expanded="#{get 'reqespecexpanded' /}">
+                                    <i class="metismenu-icon pe-7s-file"></i>
+                                    Requerimentos Especiais
+                                    <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                                </a>
+                                <ul>
+                                	#{if session.get("usuario.tipo").equals("Aluno")}
+                                	<li>
+                                        <a href="@{ReqEspeciais.form()}" class="#{get 'reformactive' /}">
+                                            <i class="metismenu-icon"></i>
+                                            Novo Requerimento 
+                                        </a>
+                                    </li>
+                                    #{/if}
+                                    <li>
+                                        <a href="@{ReqEspeciais.listar()}" class="#{get 'relistaractive' /}">
+                                            <i class="metismenu-icon"></i>
+                                            Registro de Atividades
+                                        </a>
+                                    </li>
+                                    
                                 </ul>
                             </li>
                             
