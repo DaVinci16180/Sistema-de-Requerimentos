@@ -24,7 +24,7 @@ a{
 	right:0;left:0;
     margin:auto;
     height:400px;
-    background-color: #394B59;
+    background-color: #362343;
 }
 .white-panel{
     background-color: rgba(255,255, 255, 1);
@@ -44,7 +44,7 @@ a{
 }
 
 .login-reg-panel{
-    color:#B8B8B8;
+    color:white;
 }
 
 .login-reg-panel #label-login, 
@@ -105,7 +105,7 @@ a{
 .login-show button {
     max-width: 150px;
     width: 100%;
-    background: #444444;
+    background: #362343;
     color: #f9f9f9;
     border: none;
     padding: 10px;

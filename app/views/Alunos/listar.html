@@ -1,5 +1,5 @@
 #{extends 'main.html' /}
-#{set title:'Alunos Cadastrados' /}
+#{set title:'SEACAR - Alunos Cadastrados' /}
 #{set titleicon: 'fa fa-users icon-gradient bg-tempting-azure' /}
 #{set pagetitle: 'Alunos Cadastrados' /}
 #{set subheading: 'Lista de alunos cadastrados no banco de dados.' /}
@@ -31,7 +31,7 @@
 								<td class="text-center">
 									<strong>${_index}</strong>
 								</td>
-								<td>${_.nome}</td>
+								<td><a href="@{Application.perfil(_.matricula)}">${_.nome}</a></td>
 								<td>${_.matricula}</td>
 								<td>${_.email}</td>
 								<td>${_.curso}</td>

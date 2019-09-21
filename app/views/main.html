@@ -20,6 +20,7 @@
     =========================================================
     * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
     -->
+    <link rel="icon" type="image/png" sizes="16x16" href="@{'public/architectui-html-free/architectui-html-free/assets/images/seacar-icon-tab.png'}">
 	<link href="@{'public/architectui-html-free/architectui-html-free/main.css'}" rel="stylesheet">
 	<link href="@{'public/stylesheets/main.css'}" rel="stylesheet">
 	#{get 'moreStyles' /}
@@ -29,9 +30,10 @@
     	%{String pageHeader = session.get("header")}%
     	%{String pageSidebar = session.get("sidebar")}%
         <div id="page-header" class="${pageHeader}">
-            <div class="app-header__logo">
-                <div class="logo-src"></div>
-                <div class="header__pane ml-auto">
+            
+           	<div class="app-header__logo">
+           	<a href="@{Application.index}"><div class="logo-src"></div></a>
+            	<div class="header__pane ml-auto">
                     <div>
                         <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
                             <span class="hamburger-box">
@@ -41,6 +43,7 @@
                     </div>
                 </div>
             </div>
+			          	
             <div class="app-header__mobile-menu">
                 <div>
                     <button type="button" class="hamburger hamburger--elastic mobile-toggle-nav">
@@ -79,15 +82,26 @@
                                 <div class="widget-content-left">
                                     <div class="btn-group">
                                         <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="p-0 btn">
-                                        	${session.get("usuario.nome")} &nbsp
+                                        	#{if session.get("usuario.tipo").equals("adm") == false}
+                                        		${session.get("usuario.nome")} &nbsp
+                                        	#{/if}
+                                        	#{if session.get("usuario.tipo").equals("adm")}
+                                        		SEAC
+                                        	#{/if}
                                         	<img width="35" class="rounded-circle" src='${session.get("usuario.foto")}' alt="">
                                         	<i class="fa fa-angle-down ml-2 opacity-8"></i>
                                         </a>
                                         <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
+                                        	#{if session.get("usuario.tipo").equals("adm") == false}
                                         	<h6 tabindex="-1" class="dropdown-header">Usuário</h6>
-                                            <a href="@{Application.index()}"><button type="button" tabindex="0" class="dropdown-item">Página do Usuário</button></a>
+                                            <a href='@{Application.perfil(session.get("usuario.matricula"))}'>
+                                            	<button type="button" tabindex="0" class="dropdown-item">Página do Usuário</button>
+                                           	</a>
                                             <div tabindex="-1" class="dropdown-divider"></div>
-                                            <a href="@{Login.sair()}"><button type="button" tabindex="0" class="dropdown-item">Sair</button></a>
+                                            #{/if}
+                                            <a href="@{Login.sair()}">
+                                            	<button type="button" tabindex="0" class="dropdown-item">Sair</button>
+                                           	</a>
                                         </div>
                                     </div>
                                 </div>
@@ -379,30 +393,8 @@
                                 <div class="app-footer-left">
                                     <ul class="nav">
                                         <li class="nav-item">
-                                            <a href="javascript:void(0);" class="nav-link">
-                                                Footer Link 1
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="javascript:void(0);" class="nav-link">
-                                                Footer Link 2
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="app-footer-right">
-                                    <ul class="nav">
-                                        <li class="nav-item">
-                                            <a href="javascript:void(0);" class="nav-link">
-                                                Footer Link 3
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="javascript:void(0);" class="nav-link">
-                                                <div class="badge badge-success mr-1 ml-0">
-                                                    <small>NEW</small>
-                                                </div>
-                                                Footer Link 4
+                                            <a href="@{Application.sobre}" class="nav-link">
+                                                Sobre a Plataforma
                                             </a>
                                         </li>
                                     </ul>

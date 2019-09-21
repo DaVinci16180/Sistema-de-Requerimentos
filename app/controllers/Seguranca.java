@@ -22,6 +22,8 @@ public class Seguranca extends Controller {
 		"Requerimentos.salvarRep",
 		"Requerimentos.deletar",
 		"Application.personalizar",
+		"Application.perfil",
+		"Application.sobre",
 		"ReqEspeciais.form",
 		"ReqEspeciais.salvar",
 		"ReqEspeciais.listar",
@@ -38,7 +40,8 @@ public class Seguranca extends Controller {
 			"Application.index",
 			"Application.pesquisa",
 			"Requerimentos.listar",
-			"Application.personalizar"
+			"Application.personalizar",
+			"Application.perfil",
 		})
 		static void permissaoProfessor() {
 			if (session.get("usuario.tipo").equals("Professor")) {

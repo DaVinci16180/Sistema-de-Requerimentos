@@ -12,7 +12,8 @@ import models.*;
 public class Application extends Controller {
 	
     public static void index() {
-    	String user = session.get("usuario.nome");
+    	Usuario user = Usuario.find("byMatricula", session.get("usuario.matricula")).first();
+    	//String user = session.get("usuario.nome");
         render(user);
     }
     
@@ -35,7 +36,7 @@ public class Application extends Controller {
     public static void personalizar(String mudaheader, String mudasidebar) {
 		
 		if (session.get("usuario.tipo").equals("adm") == false) {
-			Usuario user = Usuario.find("byEmail", session.get("usuario.email")).first();
+			Usuario user = Usuario.find("byMatricula", session.get("usuario.matricula")).first();
 			user.header = mudaheader;
 			user.sidebar = mudasidebar;
 			session.put("header", user.header);
@@ -49,8 +50,17 @@ public class Application extends Controller {
 			session.put("sidebar", adm.sidebar);
 			adm.save();
 		}
-		
+		flash.success("Tema alterado com sucesso!");
 		Application.index();
 	}
+    
+    public static void perfil(String matricula) {
+    	Usuario user = Usuario.find("byMatricula", matricula).first();
+    	render(user);
+    }
+    
+    public static void sobre() {
+    	render();
+    }
     
 }

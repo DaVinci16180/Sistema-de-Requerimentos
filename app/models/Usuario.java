@@ -14,6 +14,7 @@ public class Usuario extends Model {
 	public String matricula;
 	public String tipoVinculo;
 	public String url_foto_75x100;
+	public String url_foto_150x200;
 	
 	public String header;
 	public String sidebar;

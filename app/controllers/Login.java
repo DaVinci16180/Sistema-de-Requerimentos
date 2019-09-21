@@ -69,7 +69,8 @@ public class Login extends Controller{
 					usuario.matricula = dadosSUAP.matricula;
 					usuario.tipoVinculo = dadosSUAP.tipo_vinculo;
 					usuario.url_foto_75x100 = "http://suap.ifrn.edu.br" + dadosSUAP.url_foto_75x100;
-					usuario.email = dadosSUAP.email;
+					usuario.url_foto_150x200 = "http://suap.ifrn.edu.br" + dadosSUAP.url_foto_150x200;
+        			usuario.email = dadosSUAP.email;
 					usuario.header = "app-header header-shadow";
 					usuario.sidebar = "app-sidebar sidebar-shadow";
 					usuario.save();
