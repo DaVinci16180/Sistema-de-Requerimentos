@@ -9,14 +9,15 @@ import play.libs.Crypto;
 @Entity
 public class Usuario extends Model {
 	public String nome;
+	public String nomeUsual;
 	public String email;
-	public String senha;
 	public String matricula;
 	public String tipoVinculo;
 	public String url_foto_75x100;
 	public String url_foto_150x200;
+	public String curso;
 	
-	public String header;
-	public String sidebar;
+	@OneToOne
+	public Tema tema;
 
 }

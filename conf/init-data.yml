@@ -3,7 +3,6 @@ Professor(joaoh):
     matricula: 10101
     disciplina: PPI
     email: joaoh@gmail.com
-    senha: 12345678
     header: app-header header-shadow
     sidebar: app-sidebar sidebar-shadow
     
@@ -12,7 +11,6 @@ Professor(danilo):
     matricula: 10102
     disciplina: PDS
     email: danilos@gmail.com
-    senha: 12345678
     header: app-header header-shadow
     sidebar: app-sidebar sidebar-shadow
 
@@ -21,7 +19,6 @@ Professor(lucilene):
     matricula: 10103
     disciplina: Química
     email: luci@gmail.com
-    senha: 12345678
     header: app-header header-shadow
     sidebar: app-sidebar sidebar-shadow
 
@@ -30,7 +27,6 @@ Professor(joaof):
     matricula: 10104
     disciplina: Matemática
     email: joaofre@gmail.com
-    senha: 12345678
     header: app-header header-shadow
     sidebar: app-sidebar sidebar-shadow
     
@@ -39,7 +35,6 @@ Professor(joaop):
     matricula: 10105
     disciplina: Eletrônica
     email: jpaulo@gmail.com
-    senha: 12345678
     header: app-header header-shadow
     sidebar: app-sidebar sidebar-shadow
     
@@ -49,7 +44,6 @@ Aluno(francisco):
     curso: Inf
     periodo: 3
     email: franassis@gmail.com
-    senha: 12345678
     header: app-header header-shadow
     sidebar: app-sidebar sidebar-shadow
     
@@ -59,7 +53,6 @@ Aluno(joana):
     curso: Qm
     periodo: 2
     email: joanad@gmail.com
-    senha: 12345678
     header: app-header header-shadow
     sidebar: app-sidebar sidebar-shadow
 
@@ -69,7 +62,6 @@ Aluno(maria):
     curso: Rp
     periodo: 2
     email: mariabia@gmail.com
-    senha: 12345678
     header: app-header header-shadow
     sidebar: app-sidebar sidebar-shadow
 
@@ -79,7 +71,6 @@ Aluno(paulo):
     curso: Inf
     periodo: 4
     email: pauandra@gmail.com
-    senha: 12345678
     header: app-header header-shadow
     sidebar: app-sidebar sidebar-shadow
     
@@ -89,7 +80,6 @@ Aluno(leticia):
     curso: Rp
     periodo: 1
     email: leticiac@gmail.com
-    senha: 12345678
     header: app-header header-shadow
     sidebar: app-sidebar sidebar-shadow
     
@@ -98,3 +88,189 @@ Administrador(admin):
     senha: admin
     header: app-header header-shadow
     sidebar: app-sidebar sidebar-shadow
+    
+    
+    
+Disciplina(artes):
+    nome: Artes
+    curso: Todos
+
+Disciplina(biologia):
+    nome: Biologia
+    curso: Todos
+    
+Disciplina(edufisica):
+    nome: Educação Física
+    curso: Todos
+    
+Disciplina(espanhol):
+    nome: Espanhol
+    curso: Todos
+
+Disciplina(filosofia):
+    nome: Filosofia
+    curso: Todos
+
+Disciplina(geografia):
+    nome: Geografia
+    curso: Todos
+    
+Disciplina(historia):
+    nome: História
+    curso: Todos
+    
+Disciplina(ingles):
+    nome: Inglês
+    curso: Todos
+    
+Disciplina(portugues):
+    nome: Língua Portuguesa e Literatura
+    curso: Todos
+    
+Disciplina(matematica):
+    nome: Matemática
+    curso: Todos
+    
+Disciplina(qvt):
+    nome: Qualidade de Vida e Trabalho
+    curso: Todos
+    
+Disciplina(quimica):
+    nome: Química
+    curso: Todos
+
+Disciplina(sociologia):
+    nome: Sociologia
+    curso: Todos
+
+
+
+Disciplina(informatica):
+    nome: Informática Básica
+    curso: Técnico de Nível Médio em Informática
+    
+Disciplina(logica):
+    nome: Fundamentos de Lógica e Algoritmos
+    curso: Técnico de Nível Médio em Informática
+    
+Disciplina(eletricidade):
+    nome: Eletricidade Instrumental
+    curso: Técnico de Nível Médio em Informática
+    
+Disciplina(eletronica):
+    nome: Eletrônica Analógica e Digital
+    curso: Técnico de Nível Médio em Informática
+    
+Disciplina(peoo):
+    nome: Programação Estruturada e Orientada a Objetos
+    curso: Técnico de Nível Médio em Informática
+    
+Disciplina(redes):
+    nome: Arquitetura de redes de computadores e Tecnologia de Implementação de redes
+    curso: Técnico de Nível Médio em Informática
+    
+Disciplina(autoria):
+    nome: Autoria Web
+    curso: Técnico de Nível Médio em Informática
+
+Disciplina(manutencao):
+    nome: Organização e Manutenção de Computadores
+    curso: Técnico de Nível Médio em Informática
+    
+Disciplina(bd):
+    nome: Programação com Acesso a Banco de Dados
+    curso: Técnico de Nível Médio em Informática
+    
+Disciplina(redes2):
+    nome: Fundamentos de sistemas operacionais e Sistemas operacionais de redes
+    curso: Técnico de Nível Médio em Informática
+    
+Disciplina(ppi):
+    nome: Programação para Internet
+    curso: Técnico de Nível Médio em Informática
+    
+Disciplina(pds):
+    nome: Projeto de Desenvolvimento de Software
+    curso: Técnico de Nível Médio em Informática
+    
+
+    
+Disciplina(instrumentacao):
+    nome: Instrumentação Industrial
+    curso: Técnico de Nível Médio em Química
+    
+Disciplina(tbl):
+    nome: Técnicas Básicas de Laboratório
+    curso: Técnico de Nível Médio em Química
+    
+Disciplina(sstq):
+    nome: Segurança e Saúde do Técnico em Química
+    curso: Técnico de Nível Médio em Química
+    
+Disciplina(operacoes):
+    nome: Operações da Industria Química
+    curso: Técnico de Nível Médio em Química
+    
+Disciplina(fisicoquimica):
+    nome: Fisico-Química
+    curso: Técnico de Nível Médio em Química
+    
+Disciplina(fisicoexperimental):
+    nome: Fisico-Química Experimental
+    curso: Técnico de Nível Médio em Química
+    
+Disciplina(qualitativa):
+    nome: Química Analítica Qualitativa
+    curso: Técnico de Nível Médio em Química
+    
+Disciplina(inorganica):
+    nome: Química Inorgânica
+    curso: Técnico de Nível Médio em Química
+    
+Disciplina(quantitativa):
+    nome: Química Analítica Quantitativa
+    curso: Técnico de Nível Médio em Química    
+    
+Disciplina(quantitativaexperimental):
+    nome: Química Analítica Quantitativa Experimental
+    curso: Técnico de Nível Médio em Química
+    
+Disciplina(analitica):
+    nome: Química Analítica Instrumental
+    curso: Técnico de Nível Médio em Química
+    
+Disciplina(analiticaexperimental):
+    nome: Química Analítica Instrumental Experimental
+    curso: Técnico de Nível Médio em Química
+    
+Disciplina(organica):
+    nome: Química Orgânica
+    curso: Técnico de Nível Médio em Química
+    
+Disciplina(relacoes):
+    nome: Relações Interpessoais do Trabalho
+    curso: Técnico de Nível Médio em Química
+    
+Disciplina(tqr):
+    nome: Tecnologias Químicas Regionais
+    curso: Técnico de Nível Médio em Química
+    
+Disciplina(processos):
+    nome: Processos da Industria Química
+    curso: Técnico de Nível Médio em Química
+    
+Disciplina(ambiental):
+    nome: Química Ambiental
+    curso: Técnico de Nível Médio em Química
+    
+Disciplina(microbiologia):
+    nome: Microbiologia
+    curso: Técnico de Nível Médio em Química
+    
+Disciplina(corrosao):
+    nome: Corrosão
+    curso: Técnico de Nível Médio em Química
+    
+Disciplina(inglesintrumental):
+    nome: Inglês Instrumental
+    curso: Técnico de Nível Médio em Química

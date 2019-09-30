@@ -5,6 +5,8 @@ import java.util.Calendar;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import play.data.validation.Required;
 import play.db.jpa.Model;
 
 
@@ -12,6 +14,7 @@ import play.db.jpa.Model;
 public class Requerimento extends Model{
 	
 	public String tipo;
+	public String disciplina;
 	public Calendar data;
 	
 	

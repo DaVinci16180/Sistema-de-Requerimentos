@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import models.Aluno;
 import models.DadosSUAP;
 import models.Professor;
+import models.Tema;
 import models.Administrador;
 import models.Usuario;
 import play.libs.Crypto;
@@ -64,26 +65,29 @@ public class Login extends Controller{
 						usuario = new Professor();
 					} else {
 						usuario = new Aluno();
+						usuario.curso = dadosSUAP.vinculo.get("curso");
 					}
-					usuario.nome = dadosSUAP.nome_usual;
+					Tema tema = new Tema();
+					usuario.tema = tema;
+					usuario.nome = dadosSUAP.vinculo.get("nome");
+					usuario.nomeUsual = dadosSUAP.nome_usual;
 					usuario.matricula = dadosSUAP.matricula;
 					usuario.tipoVinculo = dadosSUAP.tipo_vinculo;
 					usuario.url_foto_75x100 = "http://suap.ifrn.edu.br" + dadosSUAP.url_foto_75x100;
 					usuario.url_foto_150x200 = "http://suap.ifrn.edu.br" + dadosSUAP.url_foto_150x200;
         			usuario.email = dadosSUAP.email;
-					usuario.header = "app-header header-shadow";
-					usuario.sidebar = "app-sidebar sidebar-shadow";
+        			tema.save();
 					usuario.save();
 				}
 				
 				session.put("usuario.matricula", usuario.matricula);
 				session.put("usuario.email", usuario.email);
-				session.put("usuario.nome", usuario.nome);
+				session.put("usuario.nome", usuario.nomeUsual);
 				session.put("usuario.foto", usuario.url_foto_75x100);
 				session.put("idUsuario", usuario.id);
 				session.put("usuario.tipo", usuario.tipoVinculo);
-				session.put("header", usuario.header);
-				session.put("sidebar", usuario.sidebar);
+				session.put("header", usuario.tema.header);
+				session.put("sidebar", usuario.tema.sidebar);
 				Application.index();// Página inicial
 				return ;
 

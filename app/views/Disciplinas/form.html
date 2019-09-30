@@ -1,0 +1,81 @@
+#{extends 'main.html' /}
+#{set title:'SEACAR - Disciplinas' /}
+#{set titleicon: 'fa fa-book icon-gradient bg-premium-dark' /}
+#{set pagetitle: 'Disciplinas' /}
+#{set subheading: 'Disciplinas Cadastradas.' /}
+#{set disciplinasactive: 'mm-active' /}
+<meta charset="utf-8">
+
+<div class="main-card mb-3 card">
+    <div class="card-body"><h5 class="card-title">Cadastrar Nova Disciplina</h5>
+        <form action="@{Disciplinas.salvar()}" method="post">
+        	<input type="hidden" name="disciplina.id" value="${disciplina?.id}">
+            <div class="position-relative row form-group"><label class="col-sm-2 col-form-label">Nome</label>
+                <div class="col-sm-10">
+                	<input name="disciplina.nome" type="text" class="form-control" value="${disciplina?.nome}">
+                	<span class="validation-fail">#{error 'disciplina.nome' /}</span>
+               	</div>
+            </div>
+            
+            <div class="position-relative row form-group">
+            	<label class="col-sm-2 col-form-label">Curso</label>
+                <div class="col-sm-10">
+                	<select name="disciplina.curso" class="form-control">
+                		<option value="Todos">Todos</option>
+                		<option value="Técnico de Nível Médio em Informática" #{if disciplina?.curso.equals("Técnico de Nível Médio em Informática")} selected #{/if}>Informática</option>
+                		<option value="Técnico de Nível Médio em Química" #{if disciplina?.curso.equals("Técnico de Nível Médio em Química")} selected #{/if}>Química</option>
+                		<option value="Técnico de Nível Médio em Recursos Pesqueiros" #{if disciplina?.curso.equals("Técnico de Nível Médio em Recursos Pesqueiros")} selected #{/if}>Recursos Pesqueiros</option>
+                	</select>
+               	</div>
+            </div>
+            <div class="position-relative row form-check">
+                <div class="col-sm-10 offset-sm-2">
+                    <button class="btn btn-secondary">Salvar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+    <div class="col-md-12">
+        <div class="main-card mb-3 card">
+            <div class="card-header">Alunos</div>
+            <div class="table-responsive">
+                <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th class="text-center">#</th>
+						<th>Nome</th>
+						<th>Curso</th>
+						<th>Opções</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    	#{list disciplinas}
+							<tr>
+								<td class="text-center">
+									<strong>${_index}</strong>
+								</td>
+								<td><a href="@{Disciplinas.dados(_.id)}">${_.nome}</a></td>
+								<td>${_.curso}</td>
+								<td>
+									<a href="@{Disciplinas.deletar(_.id)}">
+										<button class="mb-2 mr-2 border-0 btn-transition btn btn-outline-danger">Excluir</button>
+                                    </a>
+                                </td>
+								<td>
+									<a href="@{Disciplinas.editar(_.id)}">
+										<button class="mb-2 mr-2 border-0 btn-transition btn btn-outline-primary">Editar</button>
+									</a>
+								</td>
+							</tr>
+						#{/list}
+						#{else}
+							<td></td><td>Nenhum aluno encontrado</td><td></td><td></td><td></td><td></td><td></td>
+						#{/else}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>

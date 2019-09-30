@@ -26,30 +26,26 @@
 		<div class="main-card mb-3 card">
 			<div class="card-body">
 				<h5 class="card-title">Reposição de Atividades</h5>
-				<form class="" action="@{Requerimentos.salvarRep()}" method="post">
+				<form class="" action="@{Requerimentos.reposicao()}" method="post">
 					<div class="divider"></div>
 					
-					<input type="hidden" name="requerimento.aluno.id" value="${aluno.id}">
-					<div class="position-relative row form-group">
-						<label class="col-sm-2 col-form-label">Professor</label>
+					
+                    
+                    <div class="position-relative row form-group">
+						<label class="col-sm-2 col-form-label">Disciplina</label>
                         <div class="col-sm-10">
-                        	<select name="requerimento.professor.id" id="exampleSelect" class="form-control">
-                        		<option>-</option>
-                        		#{list professores}
+                        	<select name="idDisciplina" class="form-control">
+                        		<option value="">Selecione a Disciplina</option>
+                        		#{list disciplinas}
                         			<option value="${_.id}">${_.nome}</option>
                         		#{/list}
                         	</select>
                        	</div>
                     </div>
                     
-                    <div class="position-relative row form-group">
-                    	<label class="col-sm-2 col-form-label">Data</label>
-						<div class="col-sm-10">
-							<input name="requerimento.data" type="date" class="form-control">
-						</div>
-					</div>
+                    #{error 'disciplina.nome' /}
                     
-                    <button class="btn btn-secondary" type="submit">Enviar</button>
+                    <button class="btn btn-secondary" type="submit">Próximo</button>
 					
 				</form>
 			</div>
@@ -59,9 +55,11 @@
         <div class="main-card mb-3 card">
             <div class="card-body">
             	<h5 class="card-title">Justificativa de Faltas</h5>
-                <form class="" action="@{Requerimentos.salvarJus()}" method="post">
+                <form class="" action="@{Requerimentos.salvar()}" method="post">
                     <div class="divider"></div>
+                    
 					<input type="hidden" name="requerimento.aluno.id" value="${aluno.id}">
+					<input type="hidden" name="requerimento.tipo" value="Justificativa de Faltas">
                     <div class="position-relative row form-group">
                     	<label class="col-sm-2 col-form-label">Data</label>
 						<div class="col-sm-10">

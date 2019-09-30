@@ -1,0 +1,43 @@
+#{extends 'main.html' /}
+#{set title:'SEACAR - Adicionar Requerimento' /}
+#{set titleicon: 'fa fa-file icon-gradient bg-sunny-morning' /}
+#{set pagetitle: 'Novo Requerimento' /}
+#{set subheading: 'Submeter novo requerimento.' /}
+#{set requerimentostabactive: 'mm-active' /}
+#{set requerimentosexpanded: 'true' /}
+#{set rformactive: 'mm-active' /}
+<meta charset="utf-8">
+
+<div class="main-card mb-3 card">
+			<div class="card-body">
+				<h5 class="card-title">Reposição de Atividades</h5>
+				<form class="" action="@{Requerimentos.salvar()}" method="post">
+					<div class="divider"></div>
+					
+					<input type="hidden" name="requerimento.aluno.id" value="${aluno.id}">
+					<input type="hidden" name="requerimento.tipo" value="Reposição de Atividades">
+					<div class="position-relative row form-group">
+						<label class="col-sm-2 col-form-label">Professor</label>
+                        <div class="col-sm-10">
+                        	<select name="idProfessor" id="exampleSelect" class="form-control">
+                        		<option value="">-</option>
+                        		#{list professores}
+                        			<option value="${_.id}">${_.nome}</option>
+                        		#{/list}
+                        	</select>
+                       	</div>
+                    </div>
+                    
+                    
+                    <div class="position-relative row form-group">
+                    	<label class="col-sm-2 col-form-label">Data</label>
+						<div class="col-sm-10">
+							<input name="requerimento.data" type="date" class="form-control">
+						</div>
+					</div>
+                    
+                    <button class="btn btn-secondary" type="submit">Enviar</button>
+					
+				</form>
+			</div>
+		</div>

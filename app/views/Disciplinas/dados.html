@@ -1,0 +1,70 @@
+#{extends 'main.html' /}
+#{set title:'SEACAR - Disciplinas' /}
+#{set titleicon: 'fa fa-book icon-gradient bg-premium-dark' /}
+#{set pagetitle: 'Disciplinas' /}
+#{set subheading: 'Disciplinas Cadastradas.' /}
+#{set disciplinasactive: 'mm-active' /}
+<meta charset="utf-8">
+
+<div class="row">
+    <div class="col-md-12">
+    <a href="@{Disciplinas.form}"><button class="mb-2 mr-2 btn btn-primary btn-block">Voltar a Disciplinas</button></a>
+        <div class="main-card mb-3 card">
+            <div class="card-header">${disciplina.nome} -&nbsp<span style="color:red">Professores</span></div>
+            <div class="table-responsive">
+                <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th class="text-center">#</th>
+						<th>Nome</th>
+						<th>Matricula</th>
+						<th>E-mail</th>
+						<th>Opções</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    	#{list professoresDis, as: 'prof'}
+								<tr>
+								<td class="text-center">
+									<strong>${_index}</strong>
+								</td>
+								<td><a href="@{Application.perfilProf(prof.matricula)}">${prof.nome}</a></td>
+								<td>${prof.matricula}</td>
+								<td>${prof.email}</td>
+								<td>
+									<a href="@{Disciplinas.deletarProf(prof.id, disciplina.id)}">
+										<button class="mb-2 mr-2 border-0 btn-transition btn btn-outline-danger">Remover</button>
+                                    </a>
+                                </td>
+							</tr>
+						#{/list}
+						#{else}
+							<td></td><td>Nenhum professor encontrado</td><td></td><td></td><td></td><td></td><td></td>
+						#{/else}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>	
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="main-card mb-3 card">
+            <div class="card-body"><h5 class="card-title">Adicionar Professor à Disciplina</h5>
+                <form action="@{Disciplinas.adicionar}" method="post">
+                    <div class="position-relative form-group"><label>Selecione o Professor</label>
+                    <input type="hidden" name="disciplina.id" value="${disciplina.id}">
+                    <select size="5" name="idProfessor" class="form-control">
+                        #{list professores}
+                        	<option value="${_.id}">${_.nome}</option>
+                        #{/list}
+                    </select></div>
+                    <button class="mt-1 btn btn-primary">Adicionar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+</div>

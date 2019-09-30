@@ -18,16 +18,16 @@ public class Seguranca extends Controller {
 		"Application.pesquisa",
 		"Requerimentos.form",
 		"Requerimentos.listar",
-		"Requerimentos.salvarJus",
-		"Requerimentos.salvarRep",
+		"Requerimentos.salvar",
 		"Requerimentos.deletar",
 		"Application.personalizar",
-		"Application.perfil",
+		"Application.perfilAluno",
 		"Application.sobre",
 		"ReqEspeciais.form",
 		"ReqEspeciais.salvar",
 		"ReqEspeciais.listar",
-		"ReqEspeciais.deletar"
+		"ReqEspeciais.deletar",
+		"Requerimentos.reposicao"
 	})
 	static void permissaoAluno() {
 		if (session.get("usuario.tipo").equals("Aluno")) {
@@ -41,7 +41,13 @@ public class Seguranca extends Controller {
 			"Application.pesquisa",
 			"Requerimentos.listar",
 			"Application.personalizar",
-			"Application.perfil",
+			"Application.perfilProf",
+			"Application.perfilAluno",
+			"Application.sobre",
+			"Disciplinas.deletarProfPerfil",
+			"Professores.adicionar",
+		
+			
 		})
 		static void permissaoProfessor() {
 			if (session.get("usuario.tipo").equals("Professor")) {

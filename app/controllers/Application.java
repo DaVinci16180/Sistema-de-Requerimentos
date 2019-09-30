@@ -8,7 +8,6 @@ import java.util.*;
 import models.*;
 
 @With(Seguranca.class)
-
 public class Application extends Controller {
 	
     public static void index() {
@@ -18,17 +17,17 @@ public class Application extends Controller {
     }
     
     public static void pesquisa(String pesquisa) {
-    	List<Requerimento> requerimentos = null;
+    	List<Requerimento> requerimentos;
     	List<Aluno> alunos = null;
     	List<Professor> professores = null;
 		if (session.get("usuario.tipo").equals("Aluno")) {
-			requerimentos = Requerimento.find("professor.nome like ?1 and aluno.email like ?2", "%"+pesquisa+"%", session.get("usuario.email")).fetch();
+			requerimentos = Requerimento.find("professor.nome like ?1 and aluno.matricula like ?2", "%"+pesquisa+"%", session.get("usuario.matricula")).fetch();
 		} else if (session.get("usuario.tipo").equals("Professor")) {
-			requerimentos = Requerimento.find("aluno.nome like ?1 and professor.email like ?2", "%"+pesquisa+"%", session.get("usuario.email")).fetch();
+			requerimentos = Requerimento.find("aluno.nome like ?1 and professor.matricula like ?2", "%"+pesquisa+"%", session.get("usuario.matricula")).fetch();
 		} else {
 			requerimentos = Requerimento.find("aluno.nome like ?1 or professor.nome like ?1", "%"+pesquisa+"%").fetch();
-			alunos = Aluno.find("nome like ?1 or email like ?1 or matricula like ?1", "%"+pesquisa+"%").fetch();
-			professores = Professor.find("nome like ?1 or email like ?1 or matricula like ?1", "%"+pesquisa+"%").fetch();
+			alunos = Alunos.buscar(pesquisa);
+			professores = Professores.buscar(pesquisa);
 		}
 		render(requerimentos, alunos, professores);
 	}
@@ -37,11 +36,11 @@ public class Application extends Controller {
 		
 		if (session.get("usuario.tipo").equals("adm") == false) {
 			Usuario user = Usuario.find("byMatricula", session.get("usuario.matricula")).first();
-			user.header = mudaheader;
-			user.sidebar = mudasidebar;
-			session.put("header", user.header);
-			session.put("sidebar", user.sidebar);
-			user.save();
+			user.tema.header = mudaheader;
+			user.tema.sidebar = mudasidebar;
+			session.put("header", user.tema.header);
+			session.put("sidebar", user.tema.sidebar);
+			user.tema.save();
 		} else {
 			Administrador adm = Administrador.find("matricula = ?", session.get("usuario.matricula")).first();
 			adm.header = mudaheader;
@@ -54,9 +53,16 @@ public class Application extends Controller {
 		Application.index();
 	}
     
-    public static void perfil(String matricula) {
+    public static void perfilAluno(String matricula) {
     	Usuario user = Usuario.find("byMatricula", matricula).first();
     	render(user);
+    }
+    
+    public static void perfilProf(String matricula) {
+		List<Disciplina> disciplinasAdd = Disciplina.findAll();
+		Professor professor = Professor.find("byMatricula", matricula).first();;
+		List<Disciplina> disciplinas = professor.disciplinas;
+		render(professor, disciplinas, disciplinasAdd);
     }
     
     public static void sobre() {

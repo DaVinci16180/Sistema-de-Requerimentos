@@ -1,7 +1,7 @@
 #{extends 'main.html' /}
 #{set title:'SEACAR - Página do Usuário' /}
 #{set titleicon: 'fa fa-user icon-gradient bg-love-kiss' /}
-#{set pagetitle: 'Perfil do Usuário' /}
+#{set pagetitle: 'Perfil do Aluno' /}
 #{set subheading: 'Informações do Usuário' /}
 <meta charset="utf-8">
 
@@ -32,6 +32,10 @@
 			                <tr>
 			                    <td><strong>Matricula:</strong></td>
 			                    <td>${user.matricula}</td>
+			                </tr>
+			                <tr>
+			                    <td><strong>Curso:</strong></td>
+			                    <td>${user.curso}</td>
 			                </tr>
 			                <tr>
 			                    <td><strong>E-mail:</strong></td>

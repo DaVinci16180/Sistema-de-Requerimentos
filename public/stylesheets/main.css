@@ -3,7 +3,11 @@
 	animation: deny 1.0s ease forwards;
 }
 
-.flash {
+.validation-fail{
+	color: red;
+}
+
+.flash-success {
    z-index:1;
    width:100%;
    padding:5px;
@@ -14,6 +18,25 @@
    top:-35px;
    color:white;
    background-color:green;
+   opacity:0.2;
+   box-shadow: 0px 5px 15px black;
+   animation: drop 1.0s ease forwards,
+				back 1.0s 3.0s ease forwards;
+   
+  
+}
+
+.flash-error {
+   z-index:1;
+   width:100%;
+   padding:5px;
+   padding-top:30px;
+   position: absolute;
+   font-size: 15px;
+   left:0px;
+   top:-35px;
+   color:white;
+   background-color:red;
    opacity:0.2;
    box-shadow: 0px 5px 15px black;
    animation: drop 1.0s ease forwards,

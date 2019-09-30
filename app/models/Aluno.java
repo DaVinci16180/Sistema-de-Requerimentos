@@ -10,7 +10,6 @@ import controllers.ReqEspeciais;
 import play.db.jpa.Model;
 @Entity
 public class Aluno extends Usuario {
-	public String curso;
 	public String periodo;
 	
 	

@@ -92,9 +92,16 @@
                                         	<i class="fa fa-angle-down ml-2 opacity-8"></i>
                                         </a>
                                         <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
-                                        	#{if session.get("usuario.tipo").equals("adm") == false}
+                                        	#{if session.get("usuario.tipo").equals("Aluno")}
                                         	<h6 tabindex="-1" class="dropdown-header">Usuário</h6>
-                                            <a href='@{Application.perfil(session.get("usuario.matricula"))}'>
+                                            <a href='@{Application.perfilAluno(session.get("usuario.matricula"))}'>
+                                            	<button type="button" tabindex="0" class="dropdown-item">Página do Usuário</button>
+                                           	</a>
+                                            <div tabindex="-1" class="dropdown-divider"></div>
+                                            #{/if}
+                                            #{if session.get("usuario.tipo").equals("Professor")}
+                                        	<h6 tabindex="-1" class="dropdown-header">Usuário</h6>
+                                            <a href='@{Application.perfilProf(session.get("usuario.matricula"))}'>
                                             	<button type="button" tabindex="0" class="dropdown-item">Página do Usuário</button>
                                            	</a>
                                             <div tabindex="-1" class="dropdown-divider"></div>
@@ -360,6 +367,15 @@
                                     
                                 </ul>
                             </li>
+                            #{if session.get("usuario.tipo").equals("adm")}
+                            <li class="app-sidebar__heading">Disciplinas</li>
+                            <li>
+                                <a href="@{Disciplinas.form()}" class="#{get 'disciplinasactive' /}">
+                                    <i class="metismenu-icon pe-7s-notebook"></i>
+                                    Disciplinas
+                                </a>
+                            </li>
+                            #{/if}
                             
                         </ul>
                     </div>
@@ -369,7 +385,10 @@
                     <div class="app-main__inner">
                     	<div class="app-page-title">
                     	#{if flash.success}
-                    		<div class="flash" id="foo"><center>${flash.success}</center></div>
+                    		<div class="flash-success" id="foo"><center>${flash.success}</center></div>
+                   		#{/if}
+                   		#{if flash.error}
+                    		<div class="flash-error" id="foo"><center>${flash.error}</center></div>
                    		#{/if}
 						    <div class="page-title-wrapper">
 						        <div class="page-title-heading">

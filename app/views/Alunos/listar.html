@@ -31,7 +31,7 @@
 								<td class="text-center">
 									<strong>${_index}</strong>
 								</td>
-								<td><a href="@{Application.perfil(_.matricula)}">${_.nome}</a></td>
+								<td><a href="@{Application.perfilAluno(_.matricula)}">${_.nome}</a></td>
 								<td>${_.matricula}</td>
 								<td>${_.email}</td>
 								<td>${_.curso}</td>
@@ -41,11 +41,6 @@
 										<button class="mb-2 mr-2 border-0 btn-transition btn btn-outline-danger">Excluir</button>
                                     </a>
                                 </td>
-<!-- 								<td> -->
-<!-- 									<a href=""> -->
-<!-- 										<button class="mb-2 mr-2 border-0 btn-transition btn btn-outline-primary">Editar</button> -->
-<!-- 									</a> -->
-<!-- 								</td> -->
 							</tr>
 						#{/list}
 						#{else}
