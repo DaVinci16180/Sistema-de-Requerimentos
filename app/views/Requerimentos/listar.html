@@ -29,7 +29,9 @@
                         <th class="text-center">#</th>
 						<th>Tipo</th>
 						<th>Aluno</th>
-						<th>Professor</th>
+						#{if session.get("usuario.tipo").equals("Professor") == false} 
+							<th class="text-center">Status</th>
+						#{/if}
 						<th>Opções</th>
                     </tr>
                     </thead>
@@ -41,10 +43,26 @@
 								</td>
 								<td>${_.tipo}</td>
 								<td>${_.aluno?.nome}</td>
-								<td>${_.professor?.nome}</td>
-								<td>
-									<a href="@{Requerimentos.deletar(_.id)}">
-										<button class="mb-2 mr-2 border-0 btn-transition btn btn-outline-danger">Excluir</button>
+								#{if session.get("usuario.tipo").equals("Professor") == false}
+									#{if _.status.equals("2")}
+										<td class="text-center">
+											<div class="mb-2 mr-2 badge badge-warning">Pendente</div>
+		                                </td>
+	                                #{/if}
+	                                #{if _.status.equals("1")}
+										<td class="text-center">
+											<div class="mb-2 mr-2 badge badge-success">Deferido</div>
+		                                </td>
+	                                #{/if}
+	                                #{if _.status.equals("0")}
+										<td class="text-center">
+											<div class="mb-2 mr-2 badge badge-danger">Indeferido</div>
+		                                </td>
+	                                #{/if}
+	                            #{/if}
+                               	<td>
+									<a href="@{Requerimentos.detalhes(_.id)}">
+										<button class="mb-2 mr-2 btn btn-primary">Abrir</button>
                                     </a>
                                 </td>
 							</tr>

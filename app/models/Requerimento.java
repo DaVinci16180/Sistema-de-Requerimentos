@@ -13,10 +13,17 @@ import play.db.jpa.Model;
 @Entity
 public class Requerimento extends Model{
 	
+	{
+		this.status = "2"; 
+	}
+	
 	public String tipo;
 	public String disciplina;
 	public Calendar data;
-	
+	public String status;
+	// 2 = Pendente
+	// 1 = Deferido
+	// 0 = Indeferido
 	
 	@ManyToOne
 	@JoinColumn(name = "aluno_id")

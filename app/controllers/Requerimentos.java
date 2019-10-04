@@ -75,17 +75,16 @@ public class Requerimentos extends Controller{
 		} else if (session.get("usuario.tipo").equals("Professor")) {
 			Professor professor = (Professor) usuario;
 			requerimentos = professor.requerimentos;
+			List<Requerimento> filtro = Requerimento.find("status = ?", "1").fetch();
+			requerimentos.retainAll(filtro);
 		} else {
 			requerimentos = Requerimento.findAll();
 		}
 		render(requerimentos);
 	}
 	
-	public static void deletar(Long id) {
+	public static void detalhes(Long id) {
 		Requerimento requerimento = Requerimento.findById(id);
-		requerimento.delete();
-		flash.success("Requerimento removido com sucesso!");
-		listar();
+		render(requerimento);
 	}
-	
 }
