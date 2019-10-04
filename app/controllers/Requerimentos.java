@@ -1,5 +1,6 @@
 package controllers;
 
+import java.io.File;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -42,9 +43,9 @@ public class Requerimentos extends Controller{
 		}
 	}
 	
-	public static void salvar(Requerimento requerimento, Long idProfessor) {
+	public static void salvar(Requerimento requerimento, Long idProfessor, File foto) {
 		// Testa se existem campos em branco no formulário de criação de requerimentos
-		if (requerimento.data == null || idProfessor == null && requerimento.tipo.equals("Reposição de Atividades")) {
+		if (requerimento.data == null || idProfessor == null && requerimento.tipo.equals("Reposição de Atividades") || foto == null) {
 			flash.error("Preencha Todos os Dados para Continuar!");
 			// Se houverem campos em branco em um requerimento do tipo "Reposição de Atividades"
 			if (requerimento.tipo.equals("Reposição de Atividades")) { 
@@ -56,11 +57,14 @@ public class Requerimentos extends Controller{
 				form();
 			}
 		} else {
+			requerimento.fotoAnexo = foto.getName();
 			if (requerimento.tipo.equals("Reposição de Atividades")) {
 				Professor professor = Professor.findById(idProfessor);
 				requerimento.professor = professor;
 			}
 			requerimento.save();
+			new File("./uploads/" + requerimento.id).mkdirs();
+			foto.renameTo(new File("./uploads/" + requerimento.id + "/" + foto.getName()));
 			flash.success("Requerimento enviado com sucesso!");
 			listar();
 		}

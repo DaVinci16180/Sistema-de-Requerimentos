@@ -24,6 +24,7 @@ public class Requerimento extends Model{
 	// 2 = Pendente
 	// 1 = Deferido
 	// 0 = Indeferido
+	public String fotoAnexo;
 	
 	@ManyToOne
 	@JoinColumn(name = "aluno_id")

@@ -27,7 +27,8 @@ public class Seguranca extends Controller {
 		"ReqEspeciais.salvar",
 		"ReqEspeciais.listar",
 		"ReqEspeciais.deletar",
-		"Requerimentos.reposicao"
+		"Requerimentos.reposicao",
+		"Requerimentos.detalhes"
 	})
 	static void permissaoAluno() {
 		if (session.get("usuario.tipo").equals("Aluno")) {

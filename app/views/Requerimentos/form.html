@@ -55,7 +55,7 @@
         <div class="main-card mb-3 card">
             <div class="card-body">
             	<h5 class="card-title">Justificativa de Faltas</h5>
-                <form class="" action="@{Requerimentos.salvar()}" method="post">
+                <form class="" action="@{Requerimentos.salvar()}" method="post" enctype="multipart/form-data">
                     <div class="divider"></div>
                     
 					<input type="hidden" name="requerimento.aluno.id" value="${aluno.id}">
@@ -66,7 +66,14 @@
 							<input name="requerimento.data" type="date" class="form-control">
 						</div>
 					</div>
-                    
+					
+                    <div class="position-relative form-group">
+                    	<label for="exampleFile" class="">Anexo</label>
+                   		<input name="foto" type="file" class="form-control-file">
+                        <small class="form-text text-muted">
+                       		Envie aqui a foto do documento de justificativa do motivo da falta.
+                        </small>
+					</div>
                     <button class="btn btn-secondary" type="submit">Enviar</button>
                     
                 </form>
