@@ -12,8 +12,11 @@ public class Application extends Controller {
 	
     public static void index() {
     	Usuario user = Usuario.find("byMatricula", session.get("usuario.matricula")).first();
-    	//String user = session.get("usuario.nome");
-        render(user);
+    	List<Requerimento> requerimentos = null;
+    	if (session.get("usuario.tipo").equals("adm")) {
+    		requerimentos = Requerimento.find("status = ?", "2").fetch();
+    	}
+        render(user, requerimentos);
     }
     
     public static void pesquisa(String pesquisa) {
@@ -29,6 +32,12 @@ public class Application extends Controller {
 			alunos = Alunos.buscar(pesquisa);
 			professores = Professores.buscar(pesquisa);
 		}
+		Collections.sort(requerimentos, new Comparator<Requerimento>() {
+			@Override
+			public int compare(Requerimento r1, Requerimento r2) {
+				return r2.id.compareTo(r1.id);
+			}
+		});
 		render(requerimentos, alunos, professores);
 	}
     

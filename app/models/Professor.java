@@ -11,11 +11,9 @@ import javax.persistence.OneToMany;
 import play.db.jpa.Model;
 @Entity
 public class Professor extends Usuario{
-	public String disciplina;
-	
 	
 	@OneToMany(mappedBy="professor")
-	public List<Requerimento> requerimentos;
+	public List<ReposicaoAtividade> requerimentos;
 	
 	@ManyToMany(mappedBy="professores")
 	public List<Disciplina> disciplinas;

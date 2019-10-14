@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+	<link rel="icon" type="image/png" sizes="16x16" href="@{'public/architectui-html-free/architectui-html-free/assets/images/seacar-icon-tab.png'}">
+	<meta charset="utf-8">
+	<title>SEACAR - Sistema de Administração de Requerimentos da Secretaria Acadêmica</title>
+	<link href="@{'public/LoginPage/css/style.css'}" rel="stylesheet">
+	<link href="@{'public/stylesheets/main.css'}" rel="stylesheet">
+	<script src="@{'public/LoginPage/js/script.js'}"></script>
+	<script src="@{'public/LoginPage/js/script.js'}"></script>
+	<!------ Include the above in your HEAD tag ---------->
+	
+	<div class="login-reg-panel">
+								
+			<div class="register-info-box">
+				<h2>Bem Vindo(a) ao SEAC<span style="color:#F76946">AR</span></h2>
+				<p>Esta é uma plataforma de gestão de requerimentos totalmente online.</p>
+				<p>Efetue o Login com sua conta do SUAP para continuar</p>
+				
+			</div>
+								
+			<div class="white-panel">
+				<form action="@{Login.autenticarSuap()}" method="post">
+					<div class="login-show">
+						<div><img src="@{'public/images/Suap-login.png'}"></div>
+						<input type="text" placeholder="Matricula" name="matricula" value="${matricula}">
+						<input type="password" placeholder="Password" name="senha">
+						<button type="submit">Login</button><br><br>
+						#{if flash.error}
+							<div class="login-fail">${flash.error}</div>
+						#{/if}
+					</div>
+				</form>
+			</div>
+		</div>

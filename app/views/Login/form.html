@@ -1,36 +1,99 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-	<link rel="icon" type="image/png" sizes="16x16" href="@{'public/architectui-html-free/architectui-html-free/assets/images/seacar-icon-tab.png'}">
-	<meta charset="utf-8">
 	<title>SEACAR - Sistema de Administração de Requerimentos da Secretaria Acadêmica</title>
-	<link href="@{'public/LoginPage/css/style.css'}" rel="stylesheet">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" sizes="16x16" href="@{'public/architectui-html-free/architectui-html-free/assets/images/seacar-icon-tab.png'}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="@{'public/LoginP/Login/vendor/bootstrap/css/bootstrap.min.css'}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="@{'public/LoginP/Login/fonts/font-awesome-4.7.0/css/font-awesome.min.css'}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="@{'public/LoginP/Login/fonts/iconic/css/material-design-iconic-font.min.css'}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="@{'public/LoginP/Login/vendor/animate/animate.css'}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="@{'public/LoginP/Login/vendor/css-hamburgers/hamburgers.min.css'}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="@{'public/LoginP/Login/vendor/animsition/css/animsition.min.css'}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="@{'public/LoginP/Login/vendor/select2/select2.min.css'}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="@{'public/LoginP/Login/vendor/daterangepicker/daterangepicker.css'}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="@{'public/LoginP/Login/css/util.css'}">
+	<link rel="stylesheet" type="text/css" href="@{'public/LoginP/Login/css/main.css'}">
+<!--===============================================================================================-->
 	<link href="@{'public/stylesheets/main.css'}" rel="stylesheet">
-	<script src="@{'public/LoginPage/js/script.js'}"></script>
-	<script src="@{'public/LoginPage/js/script.js'}"></script>
-	<!------ Include the above in your HEAD tag ---------->
+</head>
+<body>
 	
-	<div class="login-reg-panel">
-								
-			<div class="register-info-box">
-				<h2>Bem Vindo(a) ao SEAC<span style="color:#F76946">AR</span></h2>
-				<p>Esta é uma plataforma de gestão de requerimentos totalmente online.</p>
-				<p>Efetue o Login com sua conta do SUAP para continuar</p>
-				
-			</div>
-								
-			<div class="white-panel">
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
 				<form action="@{Login.autenticarSuap()}" method="post">
-					<div class="login-show">
-						<div><img src="@{'public/images/Suap-login.png'}"></div>
-						<input type="text" placeholder="Matricula" name="matricula" value="${matricula}">
-						<input type="password" placeholder="Password" name="senha">
-						<button type="submit">Login</button><br><br>
+					<span class="login100-form-title p-b-49">
+						<img src="@{'public/images/Suap-login4.png'}">
+					</span>
+
+					<div class="wrap-input100 validate-input m-b-23" data-validate = "Username is reauired">
+						<span class="label-input100">Matrícula</span>
+						<input class="input100" type="text" name="matricula" placeholder="Insira sua matrícula" value="${matricula}">
+						<span class="focus-input100" data-symbol="&#xf206;"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Password is required">
+						<span class="label-input100">Senha</span>
+						<input class="input100" type="password" name="senha" placeholder="Insira sua senha">
+						<span class="focus-input100" data-symbol="&#xf190;"></span>
+					</div>
+					
+					<div class="text-right p-t-8 p-b-31">
 						#{if flash.error}
 							<div class="login-fail">${flash.error}</div>
 						#{/if}
 					</div>
+					
+					<div class="container-login100-form-btn">
+						<div class="wrap-login100-form-btn">
+							<div class="login100-form-bgbtn"></div>
+							<button class="login100-form-btn">
+								Login
+							</button>
+						</div>
+					</div>
+
+					<div class="txt1 text-center p-t-54 p-b-20">
+						<span>
+							Bem vindo ao SEACAR! Efetue login com seus dados do SUAP para seguir ao site. Não se preocupe, sua senha não será salva no banco de dados.
+						</span>
+					</div>
 				</form>
 			</div>
 		</div>
+	</div>
+	
+
+	
+	
+<!--===============================================================================================-->
+	<script src="@{'public/LoginP/Login/vendor/jquery/jquery-3.2.1.min.js'}"></script>
+<!--===============================================================================================-->
+	<script src="@{'public/LoginP/Login/vendor/animsition/js/animsition.min.js'}"></script>
+<!--===============================================================================================-->
+	<script src="@{'public/LoginP/Login/vendor/bootstrap/js/popper.js'}"></script>
+	<script src="@{'public/LoginP/Login/vendor/bootstrap/js/bootstrap.min.js'}"></script>
+<!--===============================================================================================-->
+	<script src="@{'public/LoginP/Login/vendor/select2/select2.min.js'}"></script>
+<!--===============================================================================================-->
+	<script src="@{'public/LoginP/Login/vendor/daterangepicker/moment.min.js'}"></script>
+	<script src="@{'public/LoginP/Login/vendor/daterangepicker/daterangepicker.js'}"></script>
+<!--===============================================================================================-->
+	<script src="@{'public/LoginP/Login/vendor/countdowntime/countdowntime.js'}"></script>
+<!--===============================================================================================-->
+	<script src="@{'public/LoginP/Login/js/main.js'}"></script>
+
+</body>
+</html>

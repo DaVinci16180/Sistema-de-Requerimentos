@@ -1,27 +1,68 @@
 #{extends 'main.html' /}
 #{set title:'SEACAR - Início' /}
-<meta charset="utf-8">
-
 #{set titleicon: 'fa fa-home icon-gradient bg-plum-plate' /}
 #{set pagetitle: 'Página Inicial' /}
 #{set subheading: 'Seja bem vind@ à sua página inicial do SEACAR.' /}
 #{set indexactive: 'mm-active' /}
+<meta charset="utf-8">
 
-<div class="col-md-6">
-    <div class="main-card mb-3 card">
-        <div class="card-body"><h5 class="card-title">List group contextual classes</h5>
-            <ul class="list-group">
-            #{if session.get("usuario.tipo").equals("Aluno")}
-                <li class="list-group-item-success list-group-item">PÁGINA INICIAL DO ALUNO</li>
-            #{/if}
-            #{if session.get("usuario.tipo").equals("Professor")}
-                <li class="list-group-item-info list-group-item">PÁGINA INICIAL DO PROFESSOR</li>
-            #{/if}
-            #{if session.get("usuario.tipo").equals("adm")}
-                <li class="list-group-item-warning list-group-item">PÁGINA INICIAL DA SEAC</li>
-            #{/if}
-            <li class="list-group-item-danger list-group-item">${session.get("usuario.tipo")}</li>
-            </ul>
+
+
+#{if session.get("usuario.tipo").equals("adm")}
+	<div class="row">
+    <div class="col-md-12">
+        <div class="main-card mb-3 card">
+            <div class="card-header">Requerimentos Pendentes</div>
+            <div class="table-responsive">
+                <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th class="text-center">#</th>
+						<th>Tipo</th>
+						<th>Aluno</th>
+						#{if session.get("usuario.tipo").equals("Professor") == false} 
+							<th class="text-center">Status</th>
+						#{/if}
+						<th>Opções</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    	#{list requerimentos}
+							<tr>
+								<td class="text-center">
+									<strong>${_index}</strong>
+								</td>
+								<td>${_.tipo}</td>
+								<td><a href="@{Application.perfilAluno(_.aluno.matricula)}">${_.aluno.nome}</a></td>
+								<td class="text-center">
+											<div class="mb-2 mr-2 badge badge-warning">Pendente</div>
+		                        </td>
+                               	<td>
+									<a href="@{Requerimentos.detalhes(_.id)}">
+										<button class="mb-2 mr-2 btn btn-primary">Abrir</button>
+                                    </a>
+                                </td>
+							</tr>
+						#{/list}
+						#{else}
+								<td></td><td>Nenhum requerimento encontrado</td><td></td><td></td><td></td>
+						#{/else}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
+#{/if}
+#{if session.get("usuario.tipo").equals("Professor") && user.disciplinas.size() == 0}
+	<script>
+	  $(document).ready(function(){
+	    alert('Bem Vindo(a) ao SEACAR! Realize o cadastro nas disciplinas que você leciona para começar a usar a plataforma.');
+	  });
+	</script>
+	<a href="@{Application.perfilProf(user.matricula)}">
+		<button class="mb-2 mr-2 btn btn-success btn-block" style="font-size:20pt">Cadastrar-se nas Suas Disciplinas</button>
+	</a>
+#{/if}
+
+	

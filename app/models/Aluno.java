@@ -10,8 +10,6 @@ import controllers.ReqEspeciais;
 import play.db.jpa.Model;
 @Entity
 public class Aluno extends Usuario {
-	public String periodo;
-	
 	
 	@OneToMany(mappedBy="aluno")
 	public List<Requerimento> requerimentos;

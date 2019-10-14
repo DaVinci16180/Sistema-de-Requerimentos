@@ -29,9 +29,7 @@
                         <th class="text-center">#</th>
 						<th>Tipo</th>
 						<th>Aluno</th>
-						#{if session.get("usuario.tipo").equals("Professor") == false} 
-							<th class="text-center">Status</th>
-						#{/if}
+						<th class="text-center">Status</th>
 						<th>Opções</th>
                     </tr>
                     </thead>
@@ -42,24 +40,41 @@
 									<strong>${_index}</strong>
 								</td>
 								<td>${_.tipo}</td>
-								<td>${_.aluno?.nome}</td>
-								#{if session.get("usuario.tipo").equals("Professor") == false}
-									#{if _.status.equals("2")}
+								#{if session.get("usuario.tipo").equals("Aluno") == false}
+									
+										<td><a href="@{Application.perfilAluno(_.aluno.matricula)}">${_.aluno.nome}</a></td>
+									
+								#{/if}
+								#{else}
+									<td>${_.aluno.nome}</td>
+								#{/else}
+								#{if _.status.equals("3")}
+									<td class="text-center">
+										<div class="mb-2 mr-2 badge badge-warning">Pendente</div>
+	                                </td>
+                                #{/if}
+								#{if _.status.equals("2") && session.get("usuario.tipo").equals("adm")}
+			                    	<td class="text-center">
+										<div class="mb-2 mr-2 badge badge-warning">Ao Professor</div>
+	                                </td>
+	                            #{/if}
+	                            #{else}
+				                    #{if _.status.equals("2")}
 										<td class="text-center">
 											<div class="mb-2 mr-2 badge badge-warning">Pendente</div>
 		                                </td>
 	                                #{/if}
-	                                #{if _.status.equals("1")}
-										<td class="text-center">
-											<div class="mb-2 mr-2 badge badge-success">Deferido</div>
-		                                </td>
-	                                #{/if}
-	                                #{if _.status.equals("0")}
-										<td class="text-center">
-											<div class="mb-2 mr-2 badge badge-danger">Indeferido</div>
-		                                </td>
-	                                #{/if}
-	                            #{/if}
+	                            #{/else}
+                                #{if _.status.equals("1")}
+									<td class="text-center">
+										<div class="mb-2 mr-2 badge badge-success">Deferido</div>
+	                                </td>
+                                #{/if}
+                                #{if _.status.equals("0")}
+									<td class="text-center">
+										<div class="mb-2 mr-2 badge badge-danger">Indeferido</div>
+	                                </td>
+                                #{/if}
                                	<td>
 									<a href="@{Requerimentos.detalhes(_.id)}">
 										<button class="mb-2 mr-2 btn btn-primary">Abrir</button>

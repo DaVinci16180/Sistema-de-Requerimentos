@@ -13,5 +13,6 @@ public class DadosSUAP extends Model {
 	public String tipo_vinculo;
 	public String url_foto_75x100;
 	public String url_foto_150x200;
-	public Map<String, String> vinculo;  
+	public Map<String, String> vinculo;
+	public String categoria;
 }

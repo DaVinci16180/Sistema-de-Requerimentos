@@ -14,14 +14,15 @@ import play.db.jpa.Model;
 public class Requerimento extends Model{
 	
 	{
-		this.status = "2"; 
+		this.status = "3"; 
 	}
 	
 	public String tipo;
-	public String disciplina;
+	public String codTipo;
 	public Calendar data;
 	public String status;
-	// 2 = Pendente
+	// 3 = Pendente
+	// 2 = Avaliação do professor
 	// 1 = Deferido
 	// 0 = Indeferido
 	public String fotoAnexo;
@@ -30,9 +31,7 @@ public class Requerimento extends Model{
 	@JoinColumn(name = "aluno_id")
 	public Aluno aluno;
 	
-	@ManyToOne
-	@JoinColumn(name = "professor_id")
-	public Professor professor;
+	
 	
 	
 }

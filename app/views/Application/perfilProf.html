@@ -93,3 +93,11 @@
         </div>
     </div>
 </div>
+
+#{if session.get("usuario.tipo").equals("Professor") && professor.disciplinas.size() == 0}
+	<script>
+	  $(document).ready(function(){
+	    alert('Desça a página até "Atribuir Nova Disciplina ao Professor" para cadatrar-se em suas disciplinas.');
+	  });
+	</script>
+#{/if}

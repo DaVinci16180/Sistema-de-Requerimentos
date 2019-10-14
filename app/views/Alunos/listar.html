@@ -21,8 +21,6 @@
 						<th>Matricula</th>
 						<th>E-mail</th>
 						<th>Curso</th>
-						<th>Periodo</th>
-						<th>Opções</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -35,12 +33,6 @@
 								<td>${_.matricula}</td>
 								<td>${_.email}</td>
 								<td>${_.curso}</td>
-								<td>${_.periodo}</td>
-								<td>
-									<a href="@{Alunos.deletar(_.id)}">
-										<button class="mb-2 mr-2 border-0 btn-transition btn btn-outline-danger">Excluir</button>
-                                    </a>
-                                </td>
 							</tr>
 						#{/list}
 						#{else}

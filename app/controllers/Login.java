@@ -61,18 +61,19 @@ public class Login extends Controller{
 				Usuario usuario = Usuario.find("matricula = ?", dadosSUAP.matricula).first();
 
 				if (usuario == null) {
-					if (dadosSUAP.tipo_vinculo.equals("Professor")) {
+					if (dadosSUAP.tipo_vinculo.equals("Servidor") && dadosSUAP.categoria.equals("docente")) {
 						usuario = new Professor();
+						usuario.tipoVinculo = "Professor";
 					} else {
 						usuario = new Aluno();
 						usuario.curso = dadosSUAP.vinculo.get("curso");
+						usuario.tipoVinculo = dadosSUAP.tipo_vinculo;
 					}
 					Tema tema = new Tema();
 					usuario.tema = tema;
 					usuario.nome = dadosSUAP.vinculo.get("nome");
 					usuario.nomeUsual = dadosSUAP.nome_usual;
 					usuario.matricula = dadosSUAP.matricula;
-					usuario.tipoVinculo = dadosSUAP.tipo_vinculo;
 					usuario.url_foto_75x100 = "http://suap.ifrn.edu.br" + dadosSUAP.url_foto_75x100;
 					usuario.url_foto_150x200 = "http://suap.ifrn.edu.br" + dadosSUAP.url_foto_150x200;
         			usuario.email = dadosSUAP.email;

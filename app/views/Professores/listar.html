@@ -20,8 +20,6 @@
 						<th>Nome</th>
 						<th>Matricula</th>
 						<th>E-mail</th>
-						<th>Disciplina</th>
-						<th>Opções</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -33,12 +31,6 @@
 								<td><a href="@{Application.perfilProf(_.matricula)}">${_.nome}</a></td>
 								<td>${_.matricula}</td>
 								<td>${_.email}</td>
-								<td>${_.disciplina}</td>
-								<td>
-									<a href="@{Professores.deletar(_.id)}">
-										<button class="mb-2 mr-2 border-0 btn-transition btn btn-outline-danger">Excluir</button>
-                                    </a>
-                                </td>
 							</tr>
 						#{/list}
 						#{else}

@@ -19,7 +19,6 @@ public class Seguranca extends Controller {
 		"Requerimentos.form",
 		"Requerimentos.listar",
 		"Requerimentos.salvar",
-		"Requerimentos.deletar",
 		"Application.personalizar",
 		"Application.perfilAluno",
 		"Application.sobre",
@@ -47,12 +46,14 @@ public class Seguranca extends Controller {
 			"Application.sobre",
 			"Disciplinas.deletarProfPerfil",
 			"Professores.adicionar",
-		
-			
+			"Requerimentos.detalhes",
+			"Requerimentos.deferir",
+			"Requerimentos.indeferir"
 		})
 		static void permissaoProfessor() {
 			if (session.get("usuario.tipo").equals("Professor")) {
-				Application.index();
+				//Application.index();
+				renderText("erro");
 			}
 		}
 	
