@@ -19,12 +19,14 @@ public class Requerimento extends Model{
 	
 	public String tipo;
 	public String codTipo;
+	@Required
 	public Calendar data;
 	public String status;
 	// 3 = Pendente
 	// 2 = Avaliação do professor
 	// 1 = Deferido
 	// 0 = Indeferido
+	@Required
 	public String fotoAnexo;
 	
 	@ManyToOne

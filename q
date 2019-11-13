@@ -2,7 +2,7 @@
 Author: Davi Guimaraes <ddaavvii2001@gmail.com>
 Date:   Wed Aug 28 11:49:28 2019 -0300
 
-    cVersão 2.0
+    Versão 2.0
 
 [33mcommit 5790b4f1f55d05dfeadb9aded269c71e53a77ea8[m
 Author: Davi Guimaraes <ddaavvii2001@gmail.com>

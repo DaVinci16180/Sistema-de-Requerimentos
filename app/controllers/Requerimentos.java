@@ -1,22 +1,34 @@
 package controllers;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 
+import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.mail.EmailException;
+import org.apache.commons.mail.HtmlEmail;
+
+import com.google.gson.Gson;
 
 import models.Aluno;
+import models.DadosSUAP;
 import models.Disciplina;
 import models.JustificativaFalta;
 import models.Professor;
 import models.ReposicaoAtividade;
 import models.Requerimento;
+import models.TurmasVirtuais;
 import models.Usuario;
 import play.cache.Cache;
+import play.libs.Mail;
+import play.libs.WS;
 import play.mvc.Controller;
 import play.mvc.With;
 
@@ -24,6 +36,24 @@ import play.mvc.With;
 public class Requerimentos extends Controller{
 	
 	public static void form() {
+		
+		
+//		WS.HttpResponse resposta;
+//
+//		String urlDados = "https://suap.ifrn.edu.br/api/v2/minhas-informacoes/turmas-virtuais/2019/1/";
+//
+//
+//
+//			resposta = WS.url(urlDados).get();
+//
+//			TurmasVirtuais turmasSUAP = new Gson().fromJson(resposta.getString(), TurmasVirtuais.class);
+//		
+//			List<String> turmas = new ArrayList<String>();
+//			for(int i = 1; i <= turmasSUAP.turmas.size(); i++) {
+//				turmas.add(turmasSUAP.turmas.get(i).get("descricao"));
+//			}
+			//List<Map<String, String>> turma = turmasSUAP.turmas;
+		
 		Aluno aluno = Aluno.find("matricula = ?", session.get("usuario.matricula")).first();
 		List<Disciplina> disciplinas = Disciplina.find("curso like ?1 or curso like ?2", "Todos", aluno.curso).fetch();
 		render(aluno, disciplinas);
@@ -66,7 +96,9 @@ public class Requerimentos extends Controller{
 				req.professor = professor;
 				req.fotoAnexo = foto.getName();
 				req.save();
+				// Cria a pasta para o anexo, cujo nome é a id do requerimento 
 				new File("./uploads/" + req.id).mkdirs();
+				// Renomeia a foto com o diretório declarado acima
 				foto.renameTo(new File("./uploads/" + req.id + "/" + foto.getName()));
 				flash.success("Requerimento enviado com sucesso!");
 			} else {
@@ -78,8 +110,10 @@ public class Requerimentos extends Controller{
 				}
 				req.fotoAnexo = foto.getName();
 				req.save();
+				// Cria a pasta para o anexo, cujo nome é a id do requerimento 
 				new File("./uploads/" + req.id).mkdirs();
-				foto.renameTo(new File("./uploads/" + req.id + "/" + foto.getName()));
+				// Renomeia a foto com o diretório declarado acima
+				foto.renameTo(new File("/tmp/uploads/" + req.id + "/" + foto.getName()));
 				flash.success("Requerimento enviado com sucesso!");
 			}
 			listar();
@@ -127,13 +161,26 @@ public class Requerimentos extends Controller{
 	
 	public static void detalhes(Long id) {
 		Requerimento req = Requerimento.findById(id);
-		String mes = "";
-		String data;
 		if (req.tipo.equals("Justificativa de Faltas")) {
 			JustificativaFalta requerimento = Requerimento.findById(id);
-			// Envio da data do requerimento
-			mes = "";
-			// Conversão do mês
+			String data = formatarData(id, false);
+			String dataLimite = "";
+			if (requerimento.dataLimite != null) {
+				dataLimite = formatarData(id, true);
+			}
+			render(requerimento, data, dataLimite);
+		} else {
+			ReposicaoAtividade requerimento = Requerimento.findById(id);
+			String data = formatarData(id, false);
+			render(requerimento, data);
+		}
+	}
+	
+	public static String formatarData(Long id, boolean limite) {
+		String data = "";
+		if(!limite) {
+			Requerimento requerimento = Requerimento.findById(id);
+			String mes = "";
 			switch (requerimento.data.get(Calendar.MONTH)) {
 			case 0:
 				mes = "Janeiro";
@@ -172,9 +219,10 @@ public class Requerimentos extends Controller{
 				mes = "Dezembro";
 				break;
 			}
-			// Envio da data limite, caso haja uma
+			data = requerimento.data.get(Calendar.DAY_OF_MONTH) + " de " + mes + " de " + requerimento.data.get(Calendar.YEAR);
+		} else if (limite) {
+			JustificativaFalta requerimento = Requerimento.findById(id);
 			String mesLimite = "";
-			String dataLimite = "";
 			if (requerimento.dataLimite != null) {
 				// Conversão do mês
 				switch (requerimento.dataLimite.get(Calendar.MONTH)) {
@@ -215,58 +263,10 @@ public class Requerimentos extends Controller{
 					mesLimite = "Dezembro";
 					break;
 				}
-				// Criação da String da data limite
-				dataLimite = requerimento.dataLimite.get(Calendar.DAY_OF_MONTH) + " de " + mesLimite + " de " + requerimento.data.get(Calendar.YEAR);
+				data = requerimento.dataLimite.get(Calendar.DAY_OF_MONTH) + " de " + mesLimite + " de " + requerimento.data.get(Calendar.YEAR);
 			}
-			// Criação da String da data
-			data = requerimento.data.get(Calendar.DAY_OF_MONTH) + " de " + mes + " de " + requerimento.data.get(Calendar.YEAR);
-			render(requerimento, data, dataLimite);
-		} else {
-			ReposicaoAtividade requerimento = Requerimento.findById(id);
-			// Envio da data do requerimento
-			mes = "";
-			// Conversão do mês
-			switch (requerimento.data.get(Calendar.MONTH)) {
-			case 0:
-				mes = "Janeiro";
-				break;
-			case 1:
-				mes = "Fevereiro";
-				break;
-			case 2:
-				mes = "Março";
-				break;
-			case 3:
-				mes = "Abril";
-				break;
-			case 4:
-				mes = "Maio";
-				break;
-			case 5:
-				mes = "Junho";
-				break;
-			case 6:
-				mes = "Julho";
-				break;
-			case 7:
-				mes = "Agosto";
-				break;
-			case 8:
-				mes = "Setembro";
-				break;
-			case 9:
-				mes = "Outubro";
-				break;
-			case 10:
-				mes = "Novembro";
-				break;
-			case 11:
-				mes = "Dezembro";
-				break;
-			}
-			data = requerimento.data.get(Calendar.DAY_OF_MONTH) + " de " + mes + " de " + requerimento.data.get(Calendar.YEAR);
-			render(requerimento, data);
 		}
+		return data;
 	}
 	
 	public static void deferir(Long id) {
@@ -276,6 +276,23 @@ public class Requerimentos extends Controller{
 				requerimento.status = "2";
 			} else {
 				requerimento.status = "1";
+				String data = formatarData(id, false);
+				HtmlEmail email = new HtmlEmail();
+				try {
+					email.addTo(requerimento.aluno.email);
+					email.setFrom("srnegobam@gmail.com", "Davi");
+					email.setSubject("Seu requerimento foi deferido.");
+					String msg = "<h2>"+StringEscapeUtils.escapeHtml("Olá, ")+requerimento.aluno.nome+",</h2>";
+					msg += "<p>"+StringEscapeUtils.escapeHtml("O requerimento que você solicitou foi deferido. Seguem os dados do requerimento:")+"</p>";
+					msg += "<p><strong>Tipo:</strong> "+requerimento.tipo+"<br>";
+					msg += "<strong>Aluno:</strong> "+requerimento.aluno.nome+"<br>";
+					msg += "<strong>Data Justificada:</strong> "+data+"<br></p>";
+					msg += "<p>"+StringEscapeUtils.escapeHtml("As faltas referentes ao(s) dia(s) solicitados serão devidamente tratadas.")+"</p>";
+					email.setHtmlMsg(msg);
+					Mail.send(email);
+				} catch (EmailException e) {
+					e.printStackTrace();
+				}
 			}
 			requerimento.save();
 			render("Requerimentos/detalhes.html", requerimento);
@@ -283,6 +300,23 @@ public class Requerimentos extends Controller{
 			Requerimento requerimento = Requerimento.findById(id);
 			requerimento.status = "1";
 			requerimento.save();
+			String data = formatarData(id, false);
+			HtmlEmail email = new HtmlEmail();
+			try {
+				email.addTo(requerimento.aluno.email);
+				email.setFrom("srnegobam@gmail.com", "Davi");
+				email.setSubject("Seu requerimento foi deferido.");
+				String msg = "<h2>"+StringEscapeUtils.escapeHtml("Olá, ")+requerimento.aluno.nome+",</h2>";
+				msg += "<p>"+StringEscapeUtils.escapeHtml("O requerimento que você solicitou foi deferido. Seguem os dados do requerimento:")+"</p>";
+				msg += "<p><strong>Tipo:</strong> "+requerimento.tipo+"<br>";
+				msg += "<strong>Aluno:</strong> "+requerimento.aluno.nome+"<br>";
+				msg += "<strong>Data Justificada:</strong> "+data+"<br></p>";
+				msg += "<p>"+StringEscapeUtils.escapeHtml("Entre em contato com o seu professor para agendar o horário para a reposição.")+"</p>";
+				email.setHtmlMsg(msg);
+				Mail.send(email);
+			} catch (EmailException e) {
+				e.printStackTrace();
+			}
 			render("Requerimentos/detalhes.html", requerimento);
 		}
 	}
@@ -291,6 +325,29 @@ public class Requerimentos extends Controller{
 		Requerimento requerimento = Requerimento.findById(id);
 		requerimento.status = "0";
 		requerimento.save();
-		render("Requerimentos/detalhes.html", requerimento);
+		String data = formatarData(id, false);
+		HtmlEmail email = new HtmlEmail();
+		try {
+			email.addTo(requerimento.aluno.email);
+			email.setFrom("srnegobam@gmail.com", "Davi");
+			email.setSubject("Seu requerimento foi indeferido.");
+			String msg ="<h2>"+StringEscapeUtils.escapeHtml("Olá, ")+requerimento.aluno.nome+",</h2>";
+			msg += "<p>"+StringEscapeUtils.escapeHtml("O requerimento que você solicitou foi indeferido. Seguem os dados do requerimento:")+"</p>";
+			msg += "<p><strong>Tipo:</strong> "+requerimento.tipo+"<br>";
+			msg += "<strong>Aluno:</strong> "+requerimento.aluno.nome+"<br>";
+			msg += "<strong>Data Justificada:</strong> "+data+"<br></p>";
+			email.setHtmlMsg(msg);
+			Mail.send(email);
+		} catch (EmailException e) {
+			e.printStackTrace();
+		}
+		String dataLimite = "";
+		if (requerimento.tipo.equals("Justificativa de Faltas")) {
+			JustificativaFalta req = Requerimento.findById(id);
+			if (req.dataLimite != null) {
+				dataLimite = formatarData(id, true);
+			}
+		}
+		render("Requerimentos/detalhes.html", requerimento, data, dataLimite);
 	}
 }

@@ -25,6 +25,7 @@ public class Application extends Controller {
     	List<Professor> professores = null;
 		if (session.get("usuario.tipo").equals("Aluno")) {
 			requerimentos = Requerimento.find("professor.nome like ?1 and aluno.matricula like ?2", "%"+pesquisa+"%", session.get("usuario.matricula")).fetch();
+			requerimentos.addAll(Requerimento.find("tipo like ?1", "%"+pesquisa+"%").fetch());
 		} else if (session.get("usuario.tipo").equals("Professor")) {
 			requerimentos = Requerimento.find("aluno.nome like ?1 and professor.matricula like ?2", "%"+pesquisa+"%", session.get("usuario.matricula")).fetch();
 		} else {
