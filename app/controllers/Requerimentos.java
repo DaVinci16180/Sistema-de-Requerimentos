@@ -59,7 +59,6 @@ public class Requerimentos extends Controller{
 		render(aluno, disciplinas);
 	}
 	
-	
 	public static void reposicao(Long idDisciplina) {
 		if (idDisciplina == null) {
 			flash.error("Selecione uma Disciplina!");
@@ -113,7 +112,7 @@ public class Requerimentos extends Controller{
 				// Cria a pasta para o anexo, cujo nome é a id do requerimento 
 				new File("./uploads/" + req.id).mkdirs();
 				// Renomeia a foto com o diretório declarado acima
-				foto.renameTo(new File("/tmp/uploads/" + req.id + "/" + foto.getName()));
+				foto.renameTo(new File("./uploads/" + req.id + "/" + foto.getName()));
 				flash.success("Requerimento enviado com sucesso!");
 			}
 			listar();
@@ -159,8 +158,49 @@ public class Requerimentos extends Controller{
 		}
 	}
 	
+	public static List gerarLista() {
+		
+		Usuario usuario = Usuario.find("matricula = ?", session.get("usuario.matricula")).first();
+		if (session.get("usuario.tipo").equals("Aluno")) {
+			List<Requerimento> requerimentos;
+			Aluno aluno = (Aluno) usuario;
+			requerimentos = aluno.requerimentos;
+			Collections.sort(requerimentos, new Comparator<Requerimento>() {
+				@Override
+				public int compare(Requerimento r1, Requerimento r2) {
+					return r2.id.compareTo(r1.id);
+				}
+			});
+			return requerimentos;
+		} else if (session.get("usuario.tipo").equals("Professor")) {
+			List<ReposicaoAtividade> requerimentos;
+			Professor professor = (Professor) usuario;
+			requerimentos = professor.requerimentos;
+			List<Requerimento> filtro = Requerimento.find("status = ?1 or status = ?2 or status = ?3", "0", "1", "2").fetch();
+			requerimentos.retainAll(filtro);
+			Collections.sort(requerimentos, new Comparator<Requerimento>() {
+				@Override
+				public int compare(Requerimento r1, Requerimento r2) {
+					return r2.id.compareTo(r1.id);
+				}
+			});
+			return requerimentos;
+		} else {
+			List<Requerimento> requerimentos = Requerimento.findAll();
+			Collections.sort(requerimentos, new Comparator<Requerimento>() {
+				@Override
+				public int compare(Requerimento r1, Requerimento r2) {
+					return r2.id.compareTo(r1.id);
+				}
+			});
+			return requerimentos;
+		}
+	}
+	
 	public static void detalhes(Long id) {
 		Requerimento req = Requerimento.findById(id);
+		req.lido = true;
+		req.save();
 		if (req.tipo.equals("Justificativa de Faltas")) {
 			JustificativaFalta requerimento = Requerimento.findById(id);
 			String data = formatarData(id, false);
@@ -269,9 +309,18 @@ public class Requerimentos extends Controller{
 		return data;
 	}
 	
+	public static void avaliar(Long id, String avaliar) {
+		if (avaliar.equals("deferir")) {
+			deferir(id);
+		} else if (avaliar.equals("indeferir")) {
+			indeferir(id);
+		}
+	}
+	
 	public static void deferir(Long id) {
 		if (session.get("usuario.tipo").equals("adm")) {
 			Requerimento requerimento = Requerimento.findById(id);
+			requerimento.lido = false;
 			if (requerimento.tipo.equals("Reposição de Atividades") && (requerimento.status.equals("3") || requerimento.status.equals("0"))) {
 				requerimento.status = "2";
 			} else {
@@ -295,9 +344,10 @@ public class Requerimentos extends Controller{
 				}
 			}
 			requerimento.save();
-			render("Requerimentos/detalhes.html", requerimento);
+			listar();
 		} else {
 			Requerimento requerimento = Requerimento.findById(id);
+			requerimento.lido = false;
 			requerimento.status = "1";
 			requerimento.save();
 			String data = formatarData(id, false);
@@ -317,13 +367,14 @@ public class Requerimentos extends Controller{
 			} catch (EmailException e) {
 				e.printStackTrace();
 			}
-			render("Requerimentos/detalhes.html", requerimento);
+			listar();
 		}
 	}
 	
 	public static void indeferir(Long id) {
 		Requerimento requerimento = Requerimento.findById(id);
 		requerimento.status = "0";
+		requerimento.lido = false;
 		requerimento.save();
 		String data = formatarData(id, false);
 		HtmlEmail email = new HtmlEmail();
@@ -341,13 +392,6 @@ public class Requerimentos extends Controller{
 		} catch (EmailException e) {
 			e.printStackTrace();
 		}
-		String dataLimite = "";
-		if (requerimento.tipo.equals("Justificativa de Faltas")) {
-			JustificativaFalta req = Requerimento.findById(id);
-			if (req.dataLimite != null) {
-				dataLimite = formatarData(id, true);
-			}
-		}
-		render("Requerimentos/detalhes.html", requerimento, data, dataLimite);
+		listar();
 	}
 }

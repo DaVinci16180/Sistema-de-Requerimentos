@@ -12,11 +12,23 @@ public class Application extends Controller {
 	
     public static void index() {
     	Usuario user = Usuario.find("byMatricula", session.get("usuario.matricula")).first();
-    	List<Requerimento> requerimentos = null;
-    	if (session.get("usuario.tipo").equals("adm")) {
-    		requerimentos = Requerimento.find("status = ?", "2").fetch();
+    	if (session.get("usuario.tipo").equals("Professor")) {
+    		List<ReposicaoAtividade> requerimentos = Requerimentos.gerarLista();
+    		List<ReposicaoAtividade> filtro = Requerimento.find("status = ?", "2").fetch();
+    		requerimentos.retainAll(filtro);
+    		render(user, requerimentos);
+    	} else {
+    		List<Requerimento> requerimentos = Requerimentos.gerarLista();
+    		List<ReposicaoAtividade> filtro = null;
+    		if (session.get("usuario.tipo").equals("Aluno")) {
+    			filtro = Requerimento.find("lido = ?", false).fetch();
+    		} else {
+    			filtro = Requerimento.find("status = ?", "3").fetch();
+    		}
+    		requerimentos.retainAll(filtro);
+    		render(user, requerimentos);
     	}
-        render(user, requerimentos);
+        
     }
     
     public static void pesquisa(String pesquisa) {

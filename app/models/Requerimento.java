@@ -1,5 +1,6 @@
 package models;
 
+import java.io.File;
 import java.util.Calendar;
 
 import javax.persistence.Entity;
@@ -14,7 +15,8 @@ import play.db.jpa.Model;
 public class Requerimento extends Model{
 	
 	{
-		this.status = "3"; 
+		this.status = "3";
+		this.lido = true;
 	}
 	
 	public String tipo;
@@ -28,7 +30,7 @@ public class Requerimento extends Model{
 	// 0 = Indeferido
 	@Required
 	public String fotoAnexo;
-	
+	public boolean lido;
 	@ManyToOne
 	@JoinColumn(name = "aluno_id")
 	public Aluno aluno;

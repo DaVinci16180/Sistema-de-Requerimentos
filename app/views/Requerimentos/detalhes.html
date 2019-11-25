@@ -88,18 +88,35 @@
                                #{/if}
 			                </tr>
 			                #{if session.get("usuario.tipo").equals("Aluno") == false}
-			                <tr>
-			                	<td class="text-center">
-			                    	<a href="@{Requerimentos.deferir(requerimento.id)}">
-										<button class="mb-2 mr-2 btn btn-success">Deferir</button>
-                                    </a>
-                                </td>
-			                    <td class="text-center">
-			                    	<a href="@{Requerimentos.indeferir(requerimento.id)}">
-										<button class="mb-2 mr-2 btn btn-danger">Indeferir</button>
-                                    </a>
-                                </td>
-			                </tr>
+			                <form action="@{Requerimentos.avaliar()}" method="post">
+			                	<input type="hidden" name="id" value="${requerimento.id}"> 
+				                <tr>
+				                	<td class="text-center">
+				                    	<div class="custom-radio custom-control">
+				                    		<input type="radio" id="deferir" name="avaliar" value="deferir" class="custom-control-input">
+				                    		<label class="custom-control-label" for="deferir">
+				                    			<div class="mb-2 mr-2 badge badge-success">Deferir</div>
+				                    		</label>
+				                    	</div>
+	                                </td>
+				                    <td class="text-center">
+				                    	<div class="custom-radio custom-control">
+				                    		<input type="radio" id="indeferir" name="avaliar" value="indeferir" class="custom-control-input">
+				                    		<label class="custom-control-label" for="indeferir">
+				                    			<div class="mb-2 mr-2 badge badge-danger">Indeferir</div>
+				                    		</label>
+				                    	</div>
+	                                </td>
+				                </tr>
+				                <tr>
+				                	<td class="text-center">
+				                    	
+	                                </td>
+				                    <td class="text-center">
+										<button class="mb-2 mr-2 btn btn-info">Salvar</button>
+	                                </td>
+				                </tr>
+			                </form>
 			                #{/if}
 		                </tbody>
 		            </table>

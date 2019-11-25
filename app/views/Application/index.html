@@ -8,11 +8,34 @@
 
 
 
-#{if session.get("usuario.tipo").equals("adm")}
 	<div class="row">
+	
+	
+	
+	<div class="main-card mb-3 card">
+                                        <div class="card-body">
+                                            <div id="exampleAccordion" data-children=".item">
+                                                <div class="item">
+                                                    <div data-parent="#exampleAccordion" id="collapseExample" class="collapse show"><p class="mb-3">Para realizar o cadastro em novas disciplinas acesse a página do usuário no canto superior direito da tela. É possível desfazer o cadastro nas disciplinas por lá também.
+                                                        </p></div>
+                                                </div>
+                                                <div class="item">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+	
+	
+	
+	
     <div class="col-md-12">
         <div class="main-card mb-3 card">
-            <div class="card-header">Requerimentos Pendentes</div>
+        	#{if session.get("usuario.tipo").equals("adm")}
+            	<div class="card-header">Requerimentos Pendentes</div>
+            #{/if}
+            #{else}
+            	<div class="card-header">Novas Atualizações</div>
+            #{/else}
             <div class="table-responsive">
                 <table class="align-middle mb-0 table table-borderless table-striped table-hover">
                     <thead>
@@ -20,9 +43,7 @@
                         <th class="text-center">#</th>
 						<th>Tipo</th>
 						<th>Aluno</th>
-						#{if session.get("usuario.tipo").equals("Professor") == false} 
-							<th class="text-center">Status</th>
-						#{/if}
+						<th class="text-center">Status</th>
 						<th>Opções</th>
                     </tr>
                     </thead>
@@ -34,9 +55,33 @@
 								</td>
 								<td>${_.tipo}</td>
 								<td><a href="@{Application.perfilAluno(_.aluno.matricula)}">${_.aluno.nome}</a></td>
-								<td class="text-center">
+								#{if _.status.equals("3")}
+									<td class="text-center">
+										<div class="mb-2 mr-2 badge badge-warning">Pendente</div>
+	                                </td>
+                                #{/if}
+								#{if _.status.equals("2") && session.get("usuario.tipo").equals("adm")}
+			                    	<td class="text-center">
+										<div class="mb-2 mr-2 badge badge-warning">Ao Professor</div>
+	                                </td>
+	                            #{/if}
+	                            #{else}
+				                    #{if _.status.equals("2")}
+										<td class="text-center">
 											<div class="mb-2 mr-2 badge badge-warning">Pendente</div>
-		                        </td>
+		                                </td>
+	                                #{/if}
+	                            #{/else}
+                                #{if _.status.equals("1")}
+									<td class="text-center">
+										<div class="mb-2 mr-2 badge badge-success">Deferido</div>
+	                                </td>
+                                #{/if}
+                                #{if _.status.equals("0")}
+									<td class="text-center">
+										<div class="mb-2 mr-2 badge badge-danger">Indeferido</div>
+	                                </td>
+                                #{/if}
                                	<td>
 									<a href="@{Requerimentos.detalhes(_.id)}">
 										<button class="mb-2 mr-2 btn btn-primary">Abrir</button>
@@ -53,7 +98,6 @@
         </div>
     </div>
 </div>
-#{/if}
 #{if session.get("usuario.tipo").equals("Professor") && user.disciplinas.size() == 0}
 	<script>
 	  $(document).ready(function(){
