@@ -24,7 +24,7 @@ public class Login extends Controller{
 	
 	
 	public static void autenticarSuap(String matricula, String senha) {
-		Administrador adm = Administrador.find("matricula = ? and senha = ?", matricula, senha).first();
+		Administrador adm = Administrador.find("matricula = ?1 and senha = ?2", matricula, senha).first();
 		if (adm != null) {
 			System.out.println("entrou no if");
 			session.put("usuario.matricula", adm.matricula);
@@ -58,7 +58,7 @@ public class Login extends Controller{
 
 				DadosSUAP dadosSUAP = new Gson().fromJson(resposta.getString(), DadosSUAP.class);
 
-				Usuario usuario = Usuario.find("matricula = ?", dadosSUAP.matricula).first();
+				Usuario usuario = Usuario.find("matricula = ?1", dadosSUAP.matricula).first();
 
 				if (usuario == null) {
 					if (dadosSUAP.tipo_vinculo.equals("Servidor")) {

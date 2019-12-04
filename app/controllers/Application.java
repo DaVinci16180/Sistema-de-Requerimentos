@@ -14,16 +14,16 @@ public class Application extends Controller {
     	Usuario user = Usuario.find("byMatricula", session.get("usuario.matricula")).first();
     	if (session.get("usuario.tipo").equals("Professor")) {
     		List<ReposicaoAtividade> requerimentos = Requerimentos.gerarLista();
-    		List<ReposicaoAtividade> filtro = Requerimento.find("status = ?", "2").fetch();
+    		List<ReposicaoAtividade> filtro = Requerimento.find("status = ?1", "2").fetch();
     		requerimentos.retainAll(filtro);
     		render(user, requerimentos);
     	} else {
     		List<Requerimento> requerimentos = Requerimentos.gerarLista();
     		List<ReposicaoAtividade> filtro = null;
     		if (session.get("usuario.tipo").equals("Aluno")) {
-    			filtro = Requerimento.find("lido = ?", false).fetch();
+    			filtro = Requerimento.find("lido = ?1", false).fetch();
     		} else {
-    			filtro = Requerimento.find("status = ?", "3").fetch();
+    			filtro = Requerimento.find("status = ?1", "3").fetch();
     		}
     		requerimentos.retainAll(filtro);
     		render(user, requerimentos);
@@ -64,7 +64,7 @@ public class Application extends Controller {
 			session.put("sidebar", user.tema.sidebar);
 			user.tema.save();
 		} else {
-			Administrador adm = Administrador.find("matricula = ?", session.get("usuario.matricula")).first();
+			Administrador adm = Administrador.find("matricula = ?1", session.get("usuario.matricula")).first();
 			adm.header = mudaheader;
 			adm.sidebar = mudasidebar;
 			session.put("header", adm.header);

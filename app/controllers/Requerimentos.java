@@ -54,7 +54,7 @@ public class Requerimentos extends Controller{
 //			}
 			//List<Map<String, String>> turma = turmasSUAP.turmas;
 		
-		Aluno aluno = Aluno.find("matricula = ?", session.get("usuario.matricula")).first();
+		Aluno aluno = Aluno.find("matricula = ?1", session.get("usuario.matricula")).first();
 		List<Disciplina> disciplinas = Disciplina.find("curso like ?1 or curso like ?2", "Todos", aluno.curso).fetch();
 		render(aluno, disciplinas);
 	}
@@ -64,7 +64,7 @@ public class Requerimentos extends Controller{
 			flash.error("Selecione uma Disciplina!");
 			form();
 		} else {
-			Aluno aluno = Aluno.find("matricula = ?", session.get("usuario.matricula")).first();
+			Aluno aluno = Aluno.find("matricula = ?1", session.get("usuario.matricula")).first();
 			Disciplina disciplina = Disciplina.findById(idDisciplina);
 			List<Professor> professores = disciplina.professores;
 			Cache.set("disciplinaId", idDisciplina);
@@ -121,7 +121,7 @@ public class Requerimentos extends Controller{
 	
 	public static void listar() {
 		
-		Usuario usuario = Usuario.find("matricula = ?", session.get("usuario.matricula")).first();
+		Usuario usuario = Usuario.find("matricula = ?1", session.get("usuario.matricula")).first();
 		if (session.get("usuario.tipo").equals("Aluno")) {
 			List<Requerimento> requerimentos;
 			Aluno aluno = (Aluno) usuario;
@@ -160,7 +160,7 @@ public class Requerimentos extends Controller{
 	
 	public static List gerarLista() {
 		
-		Usuario usuario = Usuario.find("matricula = ?", session.get("usuario.matricula")).first();
+		Usuario usuario = Usuario.find("matricula = ?1", session.get("usuario.matricula")).first();
 		if (session.get("usuario.tipo").equals("Aluno")) {
 			List<Requerimento> requerimentos;
 			Aluno aluno = (Aluno) usuario;
